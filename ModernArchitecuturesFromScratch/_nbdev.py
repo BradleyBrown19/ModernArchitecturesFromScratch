@@ -11,13 +11,6 @@ index = {"Dataset": "TrainingLoop.ipynb",
          "Stat": "AdvancedTrainingLoop.ipynb",
          "StatTracker": "AdvancedTrainingLoop.ipynb",
          "Stats": "AdvancedTrainingLoop.ipynb",
-         "MNIST_URL": "BasicOperations.ipynb",
-         "is_equal": "BasicOperations.ipynb",
-         "show_im": "BasicOperations.ipynb",
-         "mpl.rcParams['image.cmap']": "BasicOperations.ipynb",
-         "near": "BasicOperations.ipynb",
-         "test_near": "BasicOperations.ipynb",
-         "matmul4": "BasicOperations.ipynb",
          "Reshape": "Convolutions and Pooling.ipynb",
          "Flatten": "Convolutions and Pooling.ipynb",
          "get_fan": "Convolutions and Pooling.ipynb",
@@ -64,13 +57,20 @@ index = {"Dataset": "TrainingLoop.ipynb",
          "Batcher": "TrainingLoop.ipynb",
          "collate": "TrainingLoop.ipynb",
          "fit": "TrainingLoop.ipynb",
-         "get_datasets": "TrainingLoop.ipynb"}
+         "get_datasets": "TrainingLoop.ipynb",
+         "MNIST_URL": "basic_operations.ipynb",
+         "is_equal": "basic_operations.ipynb",
+         "mpl.rcParams['image.cmap']": "basic_operations.ipynb",
+         "show_im": "basic_operations.ipynb",
+         "near": "basic_operations.ipynb",
+         "test_near": "basic_operations.ipynb",
+         "matmul": "basic_operations.ipynb"}
 
 modules = ["advanced_training_loop_05.py",
-           "basic_operations_01.py",
            "convolutions_pooling_04.py",
            "fully_connected_network_02.py",
-           "training_loop_03.py"]
+           "training_loop_03.py",
+           "basic_operations_01.py"]
 
 doc_url = "https://BradleyBrown19.github.io/ModernArchitecuturesFromScratch/"
 

@@ -1,4 +1,3 @@
-
 <!--
 
 #################################################
@@ -13,8 +12,6 @@
 
 > Recreating recent and notable deep learning architectures from scratch using only built in python functionality and basic tensor operation. No other Pytorch or Tensorflow. Architectures include ResNet and BERT.
 
-
-This file will become your README and also the index of your documentation.
 
 ## Install
 

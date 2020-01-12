@@ -8,7 +8,16 @@ entries:
   - folderitems:
     - output: web,pdf
       title: Basic Operations
-      url: /basicoperations
+      url: /ConvolutionsAndPooling
+    - output: web,pdf
+      title: Fully Connected Network
+      url: /FullyConnectedNetwork
+    - output: web,pdf
+      title: Training Loop
+      url: /TrainingLoop
+    - output: web,pdf
+      title: Callbacks
+      url: /callbacks
     output: web
     title: Notebook
   output: web

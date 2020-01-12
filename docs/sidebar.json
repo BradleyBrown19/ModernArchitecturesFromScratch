@@ -1,5 +1,9 @@
 {
   "Notebook": {
-    "Basic Operations": "/basicoperations"
+    "Basic Operations": "/BasicOperations",
+    "Fully Connected Network": "/FullyConnectedNetwork",
+    "Training Loop": "/TrainingLoop",
+    "Basic Operations": "/ConvolutionsAndPooling",
+    "Callbacks": "/callbacks"
   }
 }
