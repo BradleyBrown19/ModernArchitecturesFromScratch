@@ -4,7 +4,6 @@ __all__ = ['MNIST_URL', 'Path', 'set_trace', 'datasets', 'pickle', 'gzip', 'math
            'is_equal', 'show_im', 'near', 'test_near', 'matmul4']
 
 # Cell
-import fastai
 from pathlib import Path
 from IPython.core.debugger import set_trace
 from fastai import datasets
