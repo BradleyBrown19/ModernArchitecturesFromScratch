@@ -43,7 +43,7 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/training_loop_03.py#L141" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
+<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/training_loop_03.py#L147" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -63,7 +63,7 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DataLoader" class="doc_header"><code>class</code> <code>DataLoader</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/training_loop_03.py#L162" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataLoader</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
+<h2 id="DataLoader" class="doc_header"><code>class</code> <code>DataLoader</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/training_loop_03.py#L168" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataLoader</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -83,7 +83,7 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Databunch" class="doc_header"><code>class</code> <code>Databunch</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L23" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Databunch</code>(<strong><code>train_dl</code></strong>, <strong><code>valid_dl</code></strong>)</p>
+<h2 id="Databunch" class="doc_header"><code>class</code> <code>Databunch</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L30" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Databunch</code>(<strong><code>train_dl</code></strong>, <strong><code>valid_dl</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -135,6 +135,25 @@ summary: "summary"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Databunch(
+Train: Data: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 64, 
+ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
+)</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -225,6 +244,22 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch 1, Accuracy: 0.9447170495986938, Loss: 0.18049047887325287
+Epoch 2, Accuracy: 0.9536165595054626, Loss: 0.14963838458061218
+Epoch 3, Accuracy: 0.9769781231880188, Loss: 0.07752970606088638
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -244,7 +279,7 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Runner" class="doc_header"><code>class</code> <code>Runner</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L35" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Runner</code>(<strong><code>learner</code></strong>, <strong><code>cbs</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="Runner" class="doc_header"><code>class</code> <code>Runner</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L42" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Runner</code>(<strong><code>learner</code></strong>, <strong><code>cbs</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -267,7 +302,7 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Callback" class="doc_header"><code>class</code> <code>Callback</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L104" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Callback</code>()</p>
+<h2 id="Callback" class="doc_header"><code>class</code> <code>Callback</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L111" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Callback</code>()</p>
 </blockquote>
 
 </div>
@@ -287,7 +322,7 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="TrainEvalCallback" class="doc_header"><code>class</code> <code>TrainEvalCallback</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L112" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TrainEvalCallback</code>() :: <a href="/ModernArchitecuturesFromScratch/AdvancedTrainingLoop#Callback"><code>Callback</code></a></p>
+<h2 id="TrainEvalCallback" class="doc_header"><code>class</code> <code>TrainEvalCallback</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L119" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TrainEvalCallback</code>() :: <a href="/ModernArchitecuturesFromScratch/AdvancedTrainingLoop#Callback"><code>Callback</code></a></p>
 </blockquote>
 
 </div>
@@ -310,7 +345,7 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Stat" class="doc_header"><code>class</code> <code>Stat</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L133" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Stat</code>(<strong><code>calc</code></strong>)</p>
+<h2 id="Stat" class="doc_header"><code>class</code> <code>Stat</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L140" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Stat</code>(<strong><code>calc</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -330,7 +365,7 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="StatTracker" class="doc_header"><code>class</code> <code>StatTracker</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L144" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>StatTracker</code>(<strong><code>metrics</code></strong>, <strong><code>in_train</code></strong>)</p>
+<h2 id="StatTracker" class="doc_header"><code>class</code> <code>StatTracker</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L151" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>StatTracker</code>(<strong><code>metrics</code></strong>, <strong><code>in_train</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -350,7 +385,7 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Stats" class="doc_header"><code>class</code> <code>Stats</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L170" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Stats</code>(<strong><code>metrics</code></strong>) :: <a href="/ModernArchitecuturesFromScratch/AdvancedTrainingLoop#Callback"><code>Callback</code></a></p>
+<h2 id="Stats" class="doc_header"><code>class</code> <code>Stats</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L177" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Stats</code>(<strong><code>metrics</code></strong>) :: <a href="/ModernArchitecuturesFromScratch/AdvancedTrainingLoop#Callback"><code>Callback</code></a></p>
 </blockquote>
 
 </div>
