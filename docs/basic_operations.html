@@ -24,65 +24,16 @@ summary: "Fundamental operations and helper functions in use throughout the libr
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Requirement already satisfied: fastai in /anaconda3/lib/python3.7/site-packages (1.0.59)
-Requirement already satisfied: Pillow in /anaconda3/lib/python3.7/site-packages (from fastai) (6.2.1)
-Requirement already satisfied: requests in /anaconda3/lib/python3.7/site-packages (from fastai) (2.22.0)
-Requirement already satisfied: pyyaml in /anaconda3/lib/python3.7/site-packages (from fastai) (5.1.1)
-Requirement already satisfied: torchvision in /anaconda3/lib/python3.7/site-packages (from fastai) (0.3.0)
-Requirement already satisfied: numpy&gt;=1.15 in /anaconda3/lib/python3.7/site-packages (from fastai) (1.17.3)
-Requirement already satisfied: pynvx&gt;=1.0.0; platform_system == &#34;Darwin&#34; in /anaconda3/lib/python3.7/site-packages (from fastai) (1.0.0)
-Requirement already satisfied: matplotlib in /anaconda3/lib/python3.7/site-packages (from fastai) (3.1.1)
-Requirement already satisfied: bottleneck in /anaconda3/lib/python3.7/site-packages (from fastai) (1.2.1)
-Requirement already satisfied: beautifulsoup4 in /anaconda3/lib/python3.7/site-packages (from fastai) (4.8.1)
-Requirement already satisfied: scipy in /anaconda3/lib/python3.7/site-packages (from fastai) (1.3.1)
-Requirement already satisfied: pandas in /anaconda3/lib/python3.7/site-packages (from fastai) (0.24.2)
-Requirement already satisfied: spacy&gt;=2.0.18 in /anaconda3/lib/python3.7/site-packages (from fastai) (2.2.2)
-Requirement already satisfied: torch&gt;=1.0.0 in /anaconda3/lib/python3.7/site-packages (from fastai) (1.3.0)
-Requirement already satisfied: packaging in /anaconda3/lib/python3.7/site-packages (from fastai) (19.2)
-Requirement already satisfied: fastprogress&gt;=0.1.19 in /anaconda3/lib/python3.7/site-packages (from fastai) (0.1.21)
-Requirement already satisfied: numexpr in /anaconda3/lib/python3.7/site-packages (from fastai) (2.7.0)
-Requirement already satisfied: nvidia-ml-py3 in /anaconda3/lib/python3.7/site-packages (from fastai) (7.352.0)
-Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /anaconda3/lib/python3.7/site-packages (from requests-&gt;fastai) (1.25.6)
-Requirement already satisfied: chardet&lt;3.1.0,&gt;=3.0.2 in /anaconda3/lib/python3.7/site-packages (from requests-&gt;fastai) (3.0.4)
-Requirement already satisfied: idna&lt;2.9,&gt;=2.5 in /anaconda3/lib/python3.7/site-packages (from requests-&gt;fastai) (2.8)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /anaconda3/lib/python3.7/site-packages (from requests-&gt;fastai) (2019.6.16)
-Requirement already satisfied: six in /anaconda3/lib/python3.7/site-packages (from torchvision-&gt;fastai) (1.12.0)
-Requirement already satisfied: cycler&gt;=0.10 in /anaconda3/lib/python3.7/site-packages (from matplotlib-&gt;fastai) (0.10.0)
-Requirement already satisfied: python-dateutil&gt;=2.1 in /anaconda3/lib/python3.7/site-packages (from matplotlib-&gt;fastai) (2.8.1)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /anaconda3/lib/python3.7/site-packages (from matplotlib-&gt;fastai) (1.1.0)
-Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.1 in /anaconda3/lib/python3.7/site-packages (from matplotlib-&gt;fastai) (2.4.4)
-Requirement already satisfied: soupsieve&gt;=1.2 in /anaconda3/lib/python3.7/site-packages (from beautifulsoup4-&gt;fastai) (1.9.5)
-Requirement already satisfied: pytz&gt;=2011k in /anaconda3/lib/python3.7/site-packages (from pandas-&gt;fastai) (2019.1)
-Requirement already satisfied: importlib-metadata&gt;=0.20; python_version &lt; &#34;3.8&#34; in /anaconda3/lib/python3.7/site-packages (from spacy&gt;=2.0.18-&gt;fastai) (0.23)
-Requirement already satisfied: plac&lt;1.2.0,&gt;=0.9.6 in /anaconda3/lib/python3.7/site-packages (from spacy&gt;=2.0.18-&gt;fastai) (1.1.3)
-Requirement already satisfied: setuptools in /anaconda3/lib/python3.7/site-packages (from spacy&gt;=2.0.18-&gt;fastai) (41.0.1)
-Requirement already satisfied: cymem&lt;2.1.0,&gt;=2.0.2 in /anaconda3/lib/python3.7/site-packages (from spacy&gt;=2.0.18-&gt;fastai) (2.0.2)
-Requirement already satisfied: thinc&lt;7.4.0,&gt;=7.3.0 in /anaconda3/lib/python3.7/site-packages (from spacy&gt;=2.0.18-&gt;fastai) (7.3.1)
-Requirement already satisfied: wasabi&lt;1.1.0,&gt;=0.3.0 in /anaconda3/lib/python3.7/site-packages (from spacy&gt;=2.0.18-&gt;fastai) (0.4.0)
-Requirement already satisfied: srsly&lt;1.1.0,&gt;=0.1.0 in /anaconda3/lib/python3.7/site-packages (from spacy&gt;=2.0.18-&gt;fastai) (0.2.0)
-Requirement already satisfied: preshed&lt;3.1.0,&gt;=3.0.2 in /anaconda3/lib/python3.7/site-packages (from spacy&gt;=2.0.18-&gt;fastai) (3.0.2)
-Requirement already satisfied: murmurhash&lt;1.1.0,&gt;=0.28.0 in /anaconda3/lib/python3.7/site-packages (from spacy&gt;=2.0.18-&gt;fastai) (1.0.2)
-Requirement already satisfied: blis&lt;0.5.0,&gt;=0.4.0 in /anaconda3/lib/python3.7/site-packages (from spacy&gt;=2.0.18-&gt;fastai) (0.4.1)
-Requirement already satisfied: zipp&gt;=0.5 in /anaconda3/lib/python3.7/site-packages (from importlib-metadata&gt;=0.20; python_version &lt; &#34;3.8&#34;-&gt;spacy&gt;=2.0.18-&gt;fastai) (0.6.0)
-Requirement already satisfied: tqdm&lt;5.0.0,&gt;=4.10.0 in /anaconda3/lib/python3.7/site-packages (from thinc&lt;7.4.0,&gt;=7.3.0-&gt;spacy&gt;=2.0.18-&gt;fastai) (4.36.1)
-Requirement already satisfied: more-itertools in /anaconda3/lib/python3.7/site-packages (from zipp&gt;=0.5-&gt;importlib-metadata&gt;=0.20; python_version &lt; &#34;3.8&#34;-&gt;spacy&gt;=2.0.18-&gt;fastai) (7.2.0)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Helper-Functions-and-Visualization">Helper Functions and Visualization<a class="anchor-link" href="#Helper-Functions-and-Visualization">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Equality-Testing">Equality Testing<a class="anchor-link" href="#Equality-Testing">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -100,7 +51,7 @@ Requirement already satisfied: more-itertools in /anaconda3/lib/python3.7/site-p
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="is_equal" class="doc_header"><code>is_equal</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/basic_operations_01.py#L24" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>is_equal</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>)</p>
 </blockquote>
-<p>Test for equality between 'a' and 'b'</p>
+<p>Test for equality between <code>a</code> and <code>b</code></p>
 
 </div>
 
@@ -109,6 +60,60 @@ Requirement already satisfied: more-itertools in /anaconda3/lib/python3.7/site-p
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="near" class="doc_header"><code>near</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/basic_operations_01.py#L29" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>near</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>)</p>
+</blockquote>
+<p>Test if tensors <code>a</code> and <code>b</code> are the same within a small tolerance</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="test_near" class="doc_header"><code>test_near</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/basic_operations_01.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>test_near</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>)</p>
+</blockquote>
+<p>API for testing if tensors are near</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Visualization">Visualization<a class="anchor-link" href="#Visualization">&#182;</a></h2>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -125,7 +130,7 @@ Requirement already satisfied: more-itertools in /anaconda3/lib/python3.7/site-p
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="show_im" class="doc_header"><code>show_im</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/basic_operations_01.py#L33" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>show_im</code>(<strong><code>image</code></strong>, <strong><code>size</code></strong>=<em><code>28</code></em>)</p>
+<h4 id="show_im" class="doc_header"><code>show_im</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/basic_operations_01.py#L46" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>show_im</code>(<strong><code>image</code></strong>, <strong><code>size</code></strong>=<em><code>28</code></em>)</p>
 </blockquote>
 <p>Displays 'image' or random 'image' from set if multiple given of given 'size'</p>
 
@@ -168,54 +173,6 @@ Requirement already satisfied: more-itertools in /anaconda3/lib/python3.7/site-p
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="near" class="doc_header"><code>near</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/basic_operations_01.py#L41" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>near</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>)</p>
-</blockquote>
-<p>Test if tensors 'a' and 'b' are the same within a small tolerance</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="test_near" class="doc_header"><code>test_near</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/basic_operations_01.py#L46" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>test_near</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>)</p>
-</blockquote>
-<p>API for testing if tensors are near</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Matmul">Matmul<a class="anchor-link" href="#Matmul">&#182;</a></h1>
@@ -236,7 +193,7 @@ Requirement already satisfied: more-itertools in /anaconda3/lib/python3.7/site-p
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="matmul" class="doc_header"><code>matmul</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/basic_operations_01.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>matmul</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>)</p>
 </blockquote>
-<p>Perform matrix multiplication on 'a' and 'b'</p>
+<p>Perform matrix multiplication on <code>a</code> and <code>b</code></p>
 
 </div>
 
@@ -245,13 +202,30 @@ Requirement already satisfied: more-itertools in /anaconda3/lib/python3.7/site-p
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="c1">#export</span>
+<span class="k">def</span> <span class="nf">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">ar</span><span class="p">,</span> <span class="n">ac</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">br</span><span class="p">,</span> <span class="n">bc</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">ac</span> <span class="o">==</span> <span class="n">br</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ar</span><span class="p">,</span><span class="n">bc</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ar_in</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ar</span><span class="p">):</span>
+        <span class="n">c</span><span class="p">[</span><span class="n">ar_in</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">ar_in</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">c</span>
+</pre></div>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">time</span> c3 = matmul3(ims,test_weight)
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">time</span> result = matmul(ims,test_weight)
 </pre></div>
 
     </div>
@@ -279,7 +253,7 @@ Wall time: 729 µs
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_near</span><span class="p">(</span><span class="n">c3</span><span class="p">,</span><span class="n">ground_truth</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_near</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="n">ground_truth</span><span class="p">)</span>
 </pre></div>
 
     </div>

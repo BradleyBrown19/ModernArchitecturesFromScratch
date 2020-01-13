@@ -60,17 +60,20 @@ index = {"Dataset": "TrainingLoop.ipynb",
          "get_datasets": "TrainingLoop.ipynb",
          "MNIST_URL": "basic_operations.ipynb",
          "is_equal": "basic_operations.ipynb",
-         "mpl.rcParams['image.cmap']": "basic_operations.ipynb",
-         "show_im": "basic_operations.ipynb",
          "near": "basic_operations.ipynb",
          "test_near": "basic_operations.ipynb",
-         "matmul": "basic_operations.ipynb"}
+         "mpl.rcParams['image.cmap']": "basic_operations.ipynb",
+         "show_im": "basic_operations.ipynb",
+         "matmul": "basic_operations.ipynb",
+         "say_hello": "tutorial.ipynb",
+         "HelloSayer": "tutorial.ipynb"}
 
 modules = ["advanced_training_loop_05.py",
            "convolutions_pooling_04.py",
            "fully_connected_network_02.py",
            "training_loop_03.py",
-           "basic_operations_01.py"]
+           "basic_operations_01.py",
+           "tutorial.py"]
 
 doc_url = "https://BradleyBrown19.github.io/ModernArchitecuturesFromScratch/"
 
