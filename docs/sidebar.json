@@ -2,7 +2,7 @@
   "Notebook": {
     "Basic Operations": "basic_operations",
     "Fully Connected Network": "FullyConnectedNetwork",
-    "Training Loop": "TrainingLoop",
+    "Model Training": "ModelTraining",
     "Convolutions and Pooling": "ConvolutionsAndPooling",
     "Callbacks": "callbacks"
   }
