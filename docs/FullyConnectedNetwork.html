@@ -63,7 +63,7 @@ summary: "Implementing backward and forward passes to train a simple fully conne
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For full information of Kaiming initialization:</p>
+<p>Please see: <a href="https://arxiv.org/abs/1502.01852">https://arxiv.org/abs/1502.01852</a> for more details and explanation on Kaiming initialisation.</p>
 
 </div>
 </div>
@@ -352,28 +352,6 @@ summary: "Implementing backward and forward passes to train a simple fully conne
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">full_pass</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span> <span class="n">targ</span><span class="p">):</span>
-    <span class="n">l1</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
-    <span class="n">l1_r</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
-    <span class="n">l2</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">l1_r</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
-
-    <span class="n">soft</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span>
-
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">cross_entropy</span><span class="p">(</span><span class="n">soft</span><span class="p">,</span> <span class="n">targ</span><span class="p">)</span>
-
-    <span class="n">softmax_cross_grad</span><span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">targ</span><span class="p">)</span>
-    <span class="n">lin_grad</span><span class="p">(</span><span class="n">l1_r</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
-    <span class="n">rel_grad</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l1_r</span><span class="p">)</span>
-    <span class="n">lin_grad</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">loss</span>
-</pre></div>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">

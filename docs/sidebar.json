@@ -3,7 +3,7 @@
     "Basic Operations": "basic_operations",
     "Fully Connected Network": "FullyConnectedNetwork",
     "Model Training": "ModelTraining",
-    "Convolutions and Pooling": "ConvolutionsAndPooling",
-    "Callbacks": "callbacks"
+    "Convolutions and Pooling": "Convolutions&Pooling",
+    "Callbacks": "Callbacks"
   }
 }
