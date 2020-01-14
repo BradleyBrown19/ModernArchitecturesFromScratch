@@ -8,16 +8,19 @@ entries:
   - folderitems:
     - output: web,pdf
       title: Basic Operations
-      url: /ConvolutionsAndPooling
+      url: basic_operations
     - output: web,pdf
       title: Fully Connected Network
-      url: /FullyConnectedNetwork
+      url: FullyConnectedNetwork
     - output: web,pdf
-      title: Training Loop
-      url: /TrainingLoop
+      title: Model Training
+      url: ModelTraining
+    - output: web,pdf
+      title: Convolutions and Pooling
+      url: ConvolutionsAndPooling
     - output: web,pdf
       title: Callbacks
-      url: /callbacks
+      url: callbacks
     output: web
     title: Notebook
   output: web
