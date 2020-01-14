@@ -4,10 +4,10 @@ __all__ = ['Dataset', 'DataLoader', 'Databunch', 'Runner', 'Callback', 'TrainEva
            'Stats']
 
 # Cell
-from .basic_operations_01 import *
-from .fully_connected_network_02 import *
-from .training_loop_03 import *
-from .convolutions_pooling_04 import *
+from ModernArchitecuturesFromScratch.basic_operations_01 import *
+from ModernArchitecuturesFromScratch.fully_connected_network_02 import *
+from ModernArchitecuturesFromScratch.training_loop_03 import *
+from ModernArchitecuturesFromScratch.convolutions_pooling_04 import *
 
 # Cell
 import math

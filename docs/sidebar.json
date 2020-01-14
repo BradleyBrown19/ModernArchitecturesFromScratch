@@ -1,9 +1,9 @@
 {
   "Notebook": {
-    "Basic Operations": "/BasicOperations",
-    "Fully Connected Network": "/FullyConnectedNetwork",
-    "Training Loop": "/TrainingLoop",
-    "Basic Operations": "/ConvolutionsAndPooling",
-    "Callbacks": "/callbacks"
+    "Basic Operations": "basic_operations",
+    "Fully Connected Network": "FullyConnectedNetwork",
+    "Training Loop": "TrainingLoop",
+    "Convolutions and Pooling": "ConvolutionsAndPooling",
+    "Callbacks": "callbacks"
   }
 }

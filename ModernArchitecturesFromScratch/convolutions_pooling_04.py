@@ -5,9 +5,9 @@ __all__ = ['Reshape', 'Flatten', 'get_fan', 'get_gain', 'get_weight', 'Padding',
            'average_back', 'pool_back', 'Pool']
 
 # Cell
-from .basic_operations_01 import *
-from .fully_connected_network_02 import *
-from .training_loop_03 import *
+from ModernArchitecuturesFromScratch.basic_operations_01 import *
+from ModernArchitecuturesFromScratch.fully_connected_network_02 import *
+from ModernArchitecuturesFromScratch.training_loop_03 import *
 
 # Cell
 class Reshape(Module):
