@@ -1,11 +1,11 @@
 ---
 
-title: Title
+title: Convolutions and Pooling
 
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "summary"
+summary: "Implementing forwards and backwards passes for convolution and pooling layers as well as support for padding and stride"
 ---
 <!--
 
@@ -25,24 +25,9 @@ summary: "summary"
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">,</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">get_datasets</span><span class="p">()</span>
-<span class="n">m</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">lf</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">fit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">lf</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">valid</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Reshaping-Tensor">Reshaping Tensor<a class="anchor-link" href="#Reshaping-Tensor">&#182;</a></h1>
+<h1 id="Tensor-Shaping-Modules">Tensor Shaping Modules<a class="anchor-link" href="#Tensor-Shaping-Modules">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -58,8 +43,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Reshape" class="doc_header"><code>class</code> <code>Reshape</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L13" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Reshape</code>(<strong><code>channels</code></strong>, <strong><code>size1</code></strong>, <strong><code>size2</code></strong>) :: <a href="/ModernArchitecuturesFromScratch/TrainingLoop#Module"><code>Module</code></a></p>
+<h2 id="Reshape" class="doc_header"><code>class</code> <code>Reshape</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L14" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Reshape</code>(<strong><code>channels</code></strong>, <strong><code>size1</code></strong>, <strong><code>size2</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
 </blockquote>
+<p>Module to reshape input tensor into tensor of (bs, <code>channels</code>, <code>size1</code>, <code>size2</code>)</p>
 
 </div>
 
@@ -81,8 +67,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Flatten" class="doc_header"><code>class</code> <code>Flatten</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L28" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Flatten</code>() :: <a href="/ModernArchitecuturesFromScratch/TrainingLoop#Module"><code>Module</code></a></p>
+<h2 id="Flatten" class="doc_header"><code>class</code> <code>Flatten</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L30" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Flatten</code>() :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
 </blockquote>
+<p>Module to flatten tensor input into shape (bs, rest)</p>
 
 </div>
 
@@ -110,8 +97,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_fan" class="doc_header"><code>get_fan</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_fan</code>(<strong><code>dim1</code></strong>, <strong><code>dim2</code></strong>, <strong><code>dim3</code></strong>, <strong><code>dim4</code></strong>, <strong><code>fan_out</code></strong>)</p>
+<h4 id="get_fan" class="doc_header"><code>get_fan</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_fan</code>(<strong><code>dim1</code></strong>, <strong><code>dim2</code></strong>, <strong><code>dim3</code></strong>, <strong><code>dim4</code></strong>, <strong><code>fan_out</code></strong>)</p>
 </blockquote>
+<p>Get the appropriate fan value based on the receptive field size and number of activations in the previous layer</p>
 
 </div>
 
@@ -130,8 +118,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_gain" class="doc_header"><code>get_gain</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L50" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_gain</code>(<strong><code>leak</code></strong>)</p>
+<h4 id="get_gain" class="doc_header"><code>get_gain</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_gain</code>(<strong><code>leak</code></strong>)</p>
 </blockquote>
+<p>Get proper initialization gain factor based on the leak amount of the next layer. Leak of 1 if no ReLU after</p>
 
 </div>
 
@@ -150,8 +139,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_weight" class="doc_header"><code>get_weight</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/fully_connected_network_02.py#L35" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_weight</code>(<strong><code>in_d</code></strong>, <strong><code>out_d</code></strong>, <strong><code>final</code></strong>)</p>
+<h4 id="get_weight" class="doc_header"><code>get_weight</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L13" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_weight</code>(<strong><code>in_d</code></strong>, <strong><code>out_d</code></strong>, <strong><code>relu_after</code></strong>)</p>
 </blockquote>
+<p>Returns weight matrix of size <code>in_d</code> x <code>out_d</code> initialized using Kaiming initialization</p>
 
 </div>
 
@@ -160,6 +150,13 @@ summary: "summary"
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Please see: <a href="https://arxiv.org/abs/1502.01852">https://arxiv.org/abs/1502.01852</a> for more details and explanation on Kaiming initialisation. The idea is to regularize the model by keeping the mean and standard deviation close to 0 and 1 respectively.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -178,6 +175,29 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>torch.Size([8, 1, 5, 5])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Without proper initialization</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -191,6 +211,28 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mean: 0.026415761560201645
+Std: 0.5615801811218262
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Using my own regularization (mean is half due to the ReLU activation)</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -205,6 +247,28 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mean: 0.4603476822376251
+Std: 0.8491917252540588
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pytorch regularization</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -216,6 +280,21 @@ summary: "summary"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mean: 0.5186582803726196
+Std: 0.945578396320343
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -238,8 +317,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Padding" class="doc_header"><code>class</code> <code>Padding</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L60" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Padding</code>(<strong><code>size</code></strong>=<em><code>1</code></em>, <strong><code>mode</code></strong>=<em><code>'constant'</code></em>, <strong><code>value</code></strong>=<em><code>0</code></em>)</p>
+<h2 id="Padding" class="doc_header"><code>class</code> <code>Padding</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L67" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Padding</code>(<strong><code>size</code></strong>=<em><code>1</code></em>, <strong><code>mode</code></strong>=<em><code>'constant'</code></em>, <strong><code>value</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
+<p>Adds padding around an image <code>size</code> pixels wide.</p>
 
 </div>
 
@@ -251,7 +331,47 @@ summary: "summary"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Can input any of the given modes:<br>
+<code>Constant</code>: Adds a constant pixel of value <code>value</code> around the image<br>
+<code>Reflection</code>: Repeats the outer most pixel value of the actual image</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Forward">Forward<a class="anchor-link" href="#Forward">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="convolve" class="doc_header"><code>convolve</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L78" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>convolve</code>(<strong><code>weight</code></strong>, <strong><code>filts</code></strong>, <strong><code>filts_bias</code></strong>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>padding</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Performs a convolution on <code>weight</code> using the given <code>filts</code> and bias <code>filts_bias</code>. Can specify a <code>stride for the convolution or</code>padding` for the main image.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Testing against PyTorch's convolution:</p>
+
 </div>
 </div>
 </div>
@@ -268,6 +388,22 @@ summary: "summary"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>torch.Size([10, 16, 28, 28])</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -303,6 +439,22 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>torch.Size([4, 16, 6, 6])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -314,6 +466,22 @@ summary: "summary"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>torch.Size([4])</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -331,22 +499,15 @@ summary: "summary"
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
 
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="convolve" class="doc_header"><code>convolve</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L70" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>convolve</code>(<strong><code>weight</code></strong>, <strong><code>filts</code></strong>, <strong><code>filts_bias</code></strong>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>padding</code></strong>=<em><code>None</code></em>)</p>
-</blockquote>
 
+<div class="output_text output_subarea output_execute_result">
+<pre>torch.Size([10, 4, 9, 9])</pre>
 </div>
 
 </div>
@@ -354,6 +515,32 @@ summary: "summary"
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convolve</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">filts</span><span class="p">,</span> <span class="n">filts_bias</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">padding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">n_filt</span><span class="p">,</span> <span class="n">depth_f</span><span class="p">,</span> <span class="n">f_w</span><span class="p">,</span> <span class="n">f_h</span> <span class="o">=</span> <span class="n">filts</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">bs</span><span class="p">,</span> <span class="n">depth_im</span><span class="p">,</span> <span class="n">im_w</span><span class="p">,</span> <span class="n">im_h</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="k">if</span> <span class="n">padding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> 
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">padding</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+        <span class="n">p_s</span> <span class="o">=</span> <span class="n">padding</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">p_s</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">p_w</span><span class="p">,</span> <span class="n">p_h</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="k">assert</span> <span class="n">depth_f</span> <span class="o">==</span> <span class="n">depth_im</span>
+
+    <span class="n">final</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">n_filt</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">im_w</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_s</span> <span class="o">-</span> <span class="n">f_w</span><span class="p">)</span><span class="o">/</span><span class="n">stride</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">im_h</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_s</span> <span class="o">-</span> <span class="n">f_h</span><span class="p">)</span><span class="o">/</span><span class="n">stride</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p_w</span><span class="o">-</span><span class="n">f_h</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">stride</span><span class="p">):</span> <span class="c1">#vertical passes</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p_h</span><span class="o">-</span><span class="n">f_w</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">stride</span><span class="p">):</span> <span class="c1">#horizontal passes</span>
+            <span class="n">final</span><span class="p">[:,:,</span><span class="n">j</span><span class="o">//</span><span class="n">stride</span><span class="p">,</span><span class="n">k</span><span class="o">//</span><span class="n">stride</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">weight</span><span class="p">[:,:,</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="n">f_h</span><span class="p">,</span><span class="n">k</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="n">f_w</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">filts</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">filts_bias</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">final</span>
+</pre></div>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -365,6 +552,22 @@ summary: "summary"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Padding (Mode: constant, Size: 2, Value: 0)</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -394,6 +597,20 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>good
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -413,8 +630,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="conv_back" class="doc_header"><code>conv_back</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L91" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>conv_back</code>(<strong><code>out</code></strong>, <strong><code>inp</code></strong>, <strong><code>weight</code></strong>, <strong><code>bias</code></strong>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>padding</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="conv_back" class="doc_header"><code>conv_back</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L100" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>conv_back</code>(<strong><code>out</code></strong>, <strong><code>inp</code></strong>, <strong><code>weight</code></strong>, <strong><code>bias</code></strong>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>padding</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
+<p>Performs a backward pass to get the gradient of the output, <code>out</code>, with respect to the <code>inp</code>, <code>weight</code> of filters and <code>bias</code>.</p>
 
 </div>
 
@@ -423,6 +641,62 @@ summary: "summary"
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conv_back</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="n">inp</span><span class="p">,</span><span class="n">weight</span><span class="p">,</span><span class="n">bias</span><span class="p">,</span><span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">padding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="s2">&quot;Performs a backward pass to get the gradient of the output, `out`, with respect to the `inp`, `weight` of filters and `bias`.&quot;</span>
+    <span class="n">dZ</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span>
+
+    <span class="p">(</span><span class="n">A_prev</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">stride</span><span class="p">)</span> <span class="o">=</span> <span class="n">inp</span><span class="p">,</span> <span class="n">weight</span><span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="n">bias</span><span class="o">.</span><span class="n">d</span><span class="p">,</span> <span class="n">stride</span>
+
+    <span class="c1"># Retrieve dimensions from A_prev&#39;s shape</span>
+    <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n_C_prev</span><span class="p">,</span> <span class="n">n_W_prev</span><span class="p">,</span> <span class="n">n_H_prev</span><span class="p">)</span> <span class="o">=</span> <span class="n">A_prev</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Retrieve dimensions from W&#39;s shape</span>
+    <span class="p">(</span><span class="n">n_C</span><span class="p">,</span> <span class="n">n_C_prev</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Retrieve dimensions from dZ&#39;s shape</span>
+    <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n_C</span><span class="p">,</span> <span class="n">n_W</span><span class="p">,</span> <span class="n">n_H</span><span class="p">)</span> <span class="o">=</span> <span class="n">dZ</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Initialize dA_prev, dW, db with the correct shapes</span>
+    <span class="n">dA_prev</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n_C_prev</span><span class="p">,</span> <span class="n">n_W_prev</span><span class="p">,</span> <span class="n">n_H_prev</span><span class="p">))</span>                           
+    <span class="n">dW</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_C</span><span class="p">,</span> <span class="n">n_C_prev</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_C</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># Pad A_prev and dA_prev</span>
+    <span class="k">if</span> <span class="n">padding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> 
+        <span class="n">A_prev</span> <span class="o">=</span> <span class="n">padding</span><span class="p">(</span><span class="n">A_prev</span><span class="p">)</span>
+        <span class="n">dA_prev</span> <span class="o">=</span> <span class="n">padding</span><span class="p">(</span><span class="n">dA_prev</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_H</span><span class="p">):</span> <span class="c1"># loop over vertical axis of the output volume</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_W</span><span class="p">):</span>               <span class="c1"># loop over horizontal axis of the output volume</span>
+
+                <span class="c1"># Find the corners of the current &quot;slice&quot;</span>
+                <span class="n">vert_start</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="n">stride</span>
+                <span class="n">vert_end</span> <span class="o">=</span> <span class="n">vert_start</span> <span class="o">+</span> <span class="n">f</span>
+                <span class="n">horiz_start</span> <span class="o">=</span> <span class="n">w</span><span class="o">*</span><span class="n">stride</span>
+                <span class="n">horiz_end</span> <span class="o">=</span> <span class="n">horiz_start</span> <span class="o">+</span> <span class="n">f</span>
+
+                <span class="c1"># Use the corners to define the slice from a_prev_pad</span>
+                <span class="n">a_slice</span> <span class="o">=</span> <span class="n">A_prev</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">horiz_start</span><span class="p">:</span><span class="n">horiz_end</span><span class="p">,</span> <span class="n">vert_start</span><span class="p">:</span><span class="n">vert_end</span><span class="p">]</span>
+
+                <span class="n">ezdz</span> <span class="o">=</span> <span class="n">dZ</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+                <span class="c1"># Update gradients for the filter, bias and input</span>
+                <span class="n">dA_prev</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">horiz_start</span><span class="p">:</span><span class="n">horiz_end</span><span class="p">,</span> <span class="n">vert_start</span><span class="p">:</span><span class="n">vert_end</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">W</span> <span class="o">*</span> <span class="n">ezdz</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">dW</span> <span class="o">+=</span> <span class="p">(</span><span class="n">a_slice</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">ezdz</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">db</span> <span class="o">+=</span> <span class="n">dZ</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">padding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> <span class="n">dA_prev</span> <span class="o">=</span> <span class="n">dA_prev</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">padding</span><span class="o">.</span><span class="n">size</span><span class="p">:</span><span class="o">-</span><span class="n">padding</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">padding</span><span class="o">.</span><span class="n">size</span><span class="p">:</span><span class="o">-</span><span class="n">padding</span><span class="o">.</span><span class="n">size</span><span class="p">]</span>
+
+    <span class="n">weight</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dW</span><span class="p">)</span>
+    <span class="n">bias</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">dA_prev</span>
+</pre></div>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -436,8 +710,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Conv" class="doc_header"><code>class</code> <code>Conv</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L142" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Conv</code>(<strong><code>n_in</code></strong>, <strong><code>n_out</code></strong>, <strong><code>kernel_size</code></strong>=<em><code>3</code></em>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>leak</code></strong>=<em><code>1</code></em>, <strong><code>padding</code></strong>=<em><code>None</code></em>) :: <a href="/ModernArchitecuturesFromScratch/TrainingLoop#Module"><code>Module</code></a></p>
+<h2 id="Conv" class="doc_header"><code>class</code> <code>Conv</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L152" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Conv</code>(<strong><code>n_in</code></strong>, <strong><code>n_out</code></strong>, <strong><code>kernel_size</code></strong>=<em><code>3</code></em>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>leak</code></strong>=<em><code>1</code></em>, <strong><code>padding</code></strong>=<em><code>None</code></em>) :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
 </blockquote>
+<p>Module to perform convolutions. Can specify kernel size, stride and padding</p>
 
 </div>
 
@@ -452,16 +727,16 @@ summary: "summary"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pad1</span> <span class="o">=</span> <span class="n">Padding</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">pad2</span> <span class="o">=</span> <span class="n">Padding</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">get_basic_conv_model</span><span class="p">(</span><span class="n">lr</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_basic_conv_model</span><span class="p">(</span><span class="n">lr</span><span class="p">):</span>
+    <span class="s2">&quot;Helper function to get a basic conv model up and running&quot;</span>
+    <span class="n">pad1</span> <span class="o">=</span> <span class="n">Padding</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pad2</span> <span class="o">=</span> <span class="n">Padding</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">SequentialModel</span><span class="p">(</span><span class="n">Reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> 
                             <span class="n">Conv</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">leak</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">pad1</span><span class="p">),</span> 
                             <span class="n">ReLU</span><span class="p">(),</span> 
                             <span class="n">Conv</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">leak</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">pad2</span><span class="p">),</span> 
                             <span class="n">Flatten</span><span class="p">(),</span> 
-                            <span class="n">Linear</span><span class="p">(</span><span class="mi">288</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+                            <span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
     <span class="n">loss_func</span> <span class="o">=</span> <span class="n">CrossEntropy</span><span class="p">()</span>
     <span class="n">optimizer</span> <span class="o">=</span> <span class="n">Optimizer</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">loss_func</span>
@@ -471,6 +746,13 @@ summary: "summary"
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Testing vs Pytorch</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -484,6 +766,40 @@ summary: "summary"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(Layer1): Reshape(1, 28, 28)
+(Layer2): Conv(1, 16, ks = 5, stride = 3)
+(Layer3): ReLU()
+(Layer4): Conv(16, 8, ks = 5, stride = 2)
+(Layer5): Flatten()
+(Layer6): Linear(128, 10)</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -540,6 +856,22 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.], requires_grad=True)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -572,6 +904,25 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>good
+good
+good
+good
+good
+good
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -585,7 +936,7 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_linear_model" class="doc_header"><code>get_linear_model</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L160" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_linear_model</code>(<strong><code>lr</code></strong>)</p>
+<h4 id="get_linear_model" class="doc_header"><code>get_linear_model</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L172" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_linear_model</code>(<strong><code>lr</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -605,8 +956,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_model" class="doc_header"><code>get_model</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/training_loop_03.py#L140" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_model</code>(<strong><code>lr</code></strong>)</p>
+<h4 id="get_model" class="doc_header"><code>get_model</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L175" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_model</code>(<strong><code>lr</code></strong>)</p>
 </blockquote>
+<p>Easy helper function to get basic fully connected network with optimizer and loss function, takes learning rate, <code>lr</code>, as a parameter</p>
 
 </div>
 
@@ -648,8 +1000,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_small_datasets" class="doc_header"><code>get_small_datasets</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L173" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_small_datasets</code>()</p>
+<h4 id="get_small_datasets" class="doc_header"><code>get_small_datasets</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L185" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_small_datasets</code>()</p>
 </blockquote>
+<p>Helper function to get smaller versions of MNIST datasets</p>
 
 </div>
 
@@ -677,10 +1030,25 @@ summary: "summary"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">valid</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">valid</span><span class="p">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch 1, Accuracy: 0.5868055820465088, Loss: 1.308275818824768
+Epoch 2, Accuracy: 0.7638888955116272, Loss: 0.7222617268562317
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -703,8 +1071,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="max_pool" class="doc_header"><code>max_pool</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L182" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>max_pool</code>(<strong><code>inp</code></strong>)</p>
+<h4 id="max_pool" class="doc_header"><code>max_pool</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L195" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>max_pool</code>(<strong><code>inp</code></strong>)</p>
 </blockquote>
+<p>Applies a max pooling operation on <code>inp</code></p>
 
 </div>
 
@@ -723,8 +1092,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="avg_pool" class="doc_header"><code>avg_pool</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L183" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>avg_pool</code>(<strong><code>inp</code></strong>)</p>
+<h4 id="avg_pool" class="doc_header"><code>avg_pool</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L199" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>avg_pool</code>(<strong><code>inp</code></strong>)</p>
 </blockquote>
+<p>Applies an average pooling operation on <code>inp</code></p>
 
 </div>
 
@@ -743,8 +1113,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="pool" class="doc_header"><code>pool</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L185" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pool</code>(<strong><code>inp</code></strong>, <strong><code>ks</code></strong>, <strong><code>stride</code></strong>, <strong><code>padding</code></strong>=<em><code>None</code></em>, <strong><code>operation</code></strong>=<em><code>'max_pool'</code></em>)</p>
+<h4 id="pool" class="doc_header"><code>pool</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L203" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pool</code>(<strong><code>inp</code></strong>, <strong><code>ks</code></strong>, <strong><code>stride</code></strong>, <strong><code>padding</code></strong>=<em><code>None</code></em>, <strong><code>operation</code></strong>=<em><code>'max_pool'</code></em>)</p>
 </blockquote>
+<p>Runs a pooling operation on <code>inp</code> of type <code>operation</code> with given <code>stride</code>, <code>ks</code> and <code>padding</code></p>
 
 </div>
 
@@ -753,6 +1124,37 @@ summary: "summary"
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pool</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">ks</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="n">max_pool</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">padding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> 
+        <span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="n">max_pool</span><span class="p">:</span> <span class="n">padding</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">inpp</span> <span class="o">=</span> <span class="n">padding</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">inpp</span> <span class="o">=</span> <span class="n">inp</span>
+
+    <span class="n">bs</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">nw</span><span class="p">,</span> <span class="n">nh</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="n">ks</span><span class="p">)</span> <span class="o">/</span> <span class="n">stride</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="nb">int</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">ks</span><span class="p">)</span> <span class="o">/</span> <span class="n">stride</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="n">nh</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nh</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nw</span><span class="p">):</span>
+            <span class="n">window</span> <span class="o">=</span> <span class="n">inpp</span><span class="p">[:,:,</span><span class="n">j</span><span class="o">*</span><span class="n">stride</span><span class="p">:</span><span class="n">j</span><span class="o">*</span><span class="n">stride</span><span class="o">+</span><span class="n">ks</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">stride</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="n">stride</span><span class="o">+</span><span class="n">ks</span><span class="p">]</span>
+            <span class="n">out</span><span class="p">[:,:,</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">operation</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Testing Pooling Forward Passes</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -814,6 +1216,27 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>good
+good
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Backwards-Passes">Backwards Passes<a class="anchor-link" href="#Backwards-Passes">&#182;</a></h1>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -827,8 +1250,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="max_back" class="doc_header"><code>max_back</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L204" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>max_back</code>(<strong><code>window</code></strong>)</p>
+<h4 id="max_back" class="doc_header"><code>max_back</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L223" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>max_back</code>(<strong><code>window</code></strong>)</p>
 </blockquote>
+<p>Gradient for <code>window</code> of max pooling</p>
 
 </div>
 
@@ -847,8 +1271,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="average_back" class="doc_header"><code>average_back</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L215" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>average_back</code>(<strong><code>window</code></strong>, <strong><code>shape</code></strong>)</p>
+<h4 id="average_back" class="doc_header"><code>average_back</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L235" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>average_back</code>(<strong><code>window</code></strong>, <strong><code>shape</code></strong>)</p>
 </blockquote>
+<p>Gradient for <code>window</code> of average pooling</p>
 
 </div>
 
@@ -867,8 +1292,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="pool_back" class="doc_header"><code>pool_back</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L220" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pool_back</code>(<strong><code>out</code></strong>, <strong><code>inp</code></strong>, <strong><code>ks</code></strong>, <strong><code>stride</code></strong>, <strong><code>padding</code></strong>=<em><code>None</code></em>, <strong><code>operation</code></strong>=<em><code>'max_pool'</code></em>)</p>
+<h4 id="pool_back" class="doc_header"><code>pool_back</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L241" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pool_back</code>(<strong><code>out</code></strong>, <strong><code>inp</code></strong>, <strong><code>ks</code></strong>, <strong><code>stride</code></strong>, <strong><code>padding</code></strong>=<em><code>None</code></em>, <strong><code>operation</code></strong>=<em><code>'max_pool'</code></em>)</p>
 </blockquote>
+<p>Function to pass gradient through pooling layers</p>
 
 </div>
 
@@ -877,6 +1303,41 @@ summary: "summary"
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pool_back</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">inp</span><span class="p">,</span> <span class="n">ks</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="n">max_pool</span><span class="p">):</span>
+    <span class="n">dZ</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span>
+
+    <span class="k">if</span> <span class="n">padding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> 
+        <span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="n">max_pool</span><span class="p">:</span> <span class="n">padding</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">padding</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+
+    <span class="n">bs</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">nh</span><span class="p">,</span> <span class="n">nw</span> <span class="o">=</span> <span class="n">dZ</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="n">dA_prev</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">ks</span><span class="p">,</span><span class="n">ks</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nh</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nw</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="n">max_pool</span><span class="p">:</span>
+                <span class="n">window</span> <span class="o">=</span> <span class="n">inp</span><span class="p">[:,:,</span><span class="n">j</span><span class="o">*</span><span class="n">stride</span><span class="p">:</span><span class="n">j</span><span class="o">*</span><span class="n">stride</span><span class="o">+</span><span class="n">ks</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">stride</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="n">stride</span><span class="o">+</span><span class="n">ks</span><span class="p">]</span>
+
+                <span class="n">mask</span> <span class="o">=</span> <span class="n">max_back</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+
+                <span class="n">dA_prev</span><span class="p">[:,:,</span><span class="n">j</span><span class="o">*</span><span class="n">stride</span><span class="p">:</span><span class="n">j</span><span class="o">*</span><span class="n">stride</span><span class="o">+</span><span class="n">ks</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">stride</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="n">stride</span><span class="o">+</span><span class="n">ks</span><span class="p">]</span> <span class="o">+=</span> <span class="n">mask</span><span class="o">*</span><span class="n">dZ</span><span class="p">[:,:,</span><span class="n">j</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="n">avg_pool</span><span class="p">:</span>
+                <span class="n">dz</span> <span class="o">=</span> <span class="n">dZ</span><span class="p">[:,:,</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+                <span class="n">dA_prev</span><span class="p">[:,:,</span><span class="n">j</span><span class="o">*</span><span class="n">stride</span><span class="p">:</span><span class="n">j</span><span class="o">*</span><span class="n">stride</span><span class="o">+</span><span class="n">ks</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">stride</span><span class="p">:</span><span class="n">i</span><span class="o">*</span><span class="n">stride</span><span class="o">+</span><span class="n">ks</span><span class="p">]</span> <span class="o">+=</span> <span class="n">average_back</span><span class="p">(</span><span class="n">dz</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">dA_prev</span>
+</pre></div>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -890,8 +1351,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Pool" class="doc_header"><code>class</code> <code>Pool</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/convolutions_pooling_04.py#L250" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Pool</code>(<strong><code>operation</code></strong>, <strong><code>ks</code></strong>=<em><code>2</code></em>, <strong><code>stride</code></strong>=<em><code>2</code></em>, <strong><code>padding</code></strong>=<em><code>None</code></em>) :: <a href="/ModernArchitecuturesFromScratch/TrainingLoop#Module"><code>Module</code></a></p>
+<h2 id="Pool" class="doc_header"><code>class</code> <code>Pool</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/convolutions_pooling_04.py#L272" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Pool</code>(<strong><code>operation</code></strong>, <strong><code>ks</code></strong>=<em><code>2</code></em>, <strong><code>stride</code></strong>=<em><code>2</code></em>, <strong><code>padding</code></strong>=<em><code>None</code></em>) :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
 </blockquote>
+<p>Module for defining a pooling layer in a model</p>
 
 </div>
 
@@ -917,6 +1379,40 @@ summary: "summary"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(Layer1): Reshape(1, 28, 28)
+(Layer2): Conv(1, 4, ks = 3, stride = 1)
+(Layer3): AveragePool(ks: 2, stride: 1)
+(Layer4): Conv(4, 1, ks = 3, stride = 1)
+(Layer5): Flatten()
+(Layer6): Linear(529, 10)</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -969,6 +1465,22 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.], requires_grad=True)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -996,6 +1508,39 @@ summary: "summary"
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([[[[ 0.0627,  0.3011,  0.2769],
+          [ 0.3184,  0.4685,  0.3356],
+          [ 0.6687,  1.0072,  0.6248]]],
+
+
+        [[[ 1.3921,  0.9514,  0.2135],
+          [ 1.3554,  0.5316, -0.2174],
+          [ 1.0866,  0.1363, -0.4313]]],
+
+
+        [[[ 0.2056,  0.2428,  0.2551],
+          [ 0.3247,  0.3450,  0.1667],
+          [ 0.6809,  0.7636,  0.3830]]],
+
+
+        [[[ 0.2597,  0.7185,  0.6363],
+          [ 1.1045,  1.2026,  0.7191],
+          [ 1.7085,  1.4304,  0.6249]]]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -1006,6 +1551,39 @@ summary: "summary"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([[[[ 0.0078,  0.0376,  0.0346],
+          [ 0.0398,  0.0586,  0.0420],
+          [ 0.0836,  0.1259,  0.0781]]],
+
+
+        [[[ 0.1740,  0.1189,  0.0267],
+          [ 0.1694,  0.0665, -0.0272],
+          [ 0.1358,  0.0170, -0.0539]]],
+
+
+        [[[ 0.0257,  0.0303,  0.0319],
+          [ 0.0406,  0.0431,  0.0208],
+          [ 0.0851,  0.0954,  0.0479]]],
+
+
+        [[[ 0.0325,  0.0898,  0.0795],
+          [ 0.1381,  0.1503,  0.0899],
+          [ 0.2136,  0.1788,  0.0781]]]])</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -1023,6 +1601,24 @@ summary: "summary"
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>not near
+not near
+not near
+good
+good
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 

@@ -1,11 +1,11 @@
 ---
 
-title: Title
+title: Model Training
 
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "summary"
+summary: "Improved and refactored FCN modules as well as Parameters, Optimizers and a Training Loop"
 ---
 <!--
 
@@ -179,8 +179,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fit" class="doc_header"><code>fit</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L210" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fit</code>(<strong><code>epochs</code></strong>, <strong><code>model</code></strong>, <strong><code>optim</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>train</code></strong>, <strong><code>valid</code></strong>)</p>
+<h4 id="fit" class="doc_header"><code>fit</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L216" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fit</code>(<strong><code>epochs</code></strong>, <strong><code>model</code></strong>, <strong><code>optim</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>train</code></strong>, <strong><code>valid</code></strong>)</p>
 </blockquote>
+<p>Fit function 4: Added validation loops, model training status as well as printing of some metrics</p>
 
 </div>
 
@@ -631,9 +632,8 @@ Parameter: torch.Size([10]), Requires grad: True
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bs</span> <span class="o">=</span> <span class="mi">64</span>
-
-<span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">optim</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">valid</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">optim</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">valid</span><span class="p">):</span>
+    <span class="s2">&quot;Fit function 2: Added easier optimization steps&quot;</span>
     <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)</span><span class="o">//</span><span class="n">bs</span><span class="p">)):</span>
             <span class="n">start</span> <span class="o">=</span> <span class="n">batch</span><span class="o">*</span><span class="n">bs</span>
@@ -668,6 +668,22 @@ Parameter: torch.Size([10]), Requires grad: True
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch 1, Accuracy: 0.8959000110626221
+Epoch 2, Accuracy: 0.9216799736022949
+Epoch 3, Accuracy: 0.9330599904060364
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -683,6 +699,7 @@ Parameter: torch.Size([10]), Requires grad: True
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="get_model" class="doc_header"><code>get_model</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L175" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_model</code>(<strong><code>lr</code></strong>)</p>
 </blockquote>
+<p>Easy helper function to get basic fully connected network with optimizer and loss function, takes learning rate, <code>lr</code>, as a parameter</p>
 
 </div>
 
@@ -710,8 +727,9 @@ Parameter: torch.Size([10]), Requires grad: True
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L182" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
+<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L183" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
 </blockquote>
+<p>Container class to store and get input and target values from a dataset</p>
 
 </div>
 
@@ -727,12 +745,36 @@ Parameter: torch.Size([10]), Requires grad: True
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">DataLoader</span><span class="p">():</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">bs</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="n">ds</span><span class="p">,</span><span class="n">bs</span>
+    <span class="s2">&quot;Container class to iterate over a dataset given a batcht size&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">bs</span><span class="p">):</span> 
+        <span class="s2">&quot;Provide a dataset, `ds`, and batchsize, `bs`&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="n">ds</span><span class="p">,</span><span class="n">bs</span>
     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">):</span> <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">]</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DataLoader.__init__" class="doc_header"><code>DataLoader.__init__</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L210" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataLoader.__init__</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
+</blockquote>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -757,6 +799,7 @@ Parameter: torch.Size([10]), Requires grad: True
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">optim</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">):</span>
+    <span class="s2">&quot;Training Loop 3: Refactored out for easy databunch usage&quot;</span>
     <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">xb</span><span class="p">,</span> <span class="n">yb</span> <span class="ow">in</span> <span class="n">data_loader</span><span class="p">:</span>
             <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">xb</span><span class="p">),</span> <span class="n">yb</span><span class="p">)</span>
@@ -787,6 +830,22 @@ Parameter: torch.Size([10]), Requires grad: True
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch 1, Accuracy: 0.9178799986839294
+Epoch 2, Accuracy: 0.9384199976921082
+Epoch 3, Accuracy: 0.9474200010299683
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -806,8 +865,30 @@ Parameter: torch.Size([10]), Requires grad: True
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Batcher" class="doc_header"><code>class</code> <code>Batcher</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L191" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Batcher</code>(<strong><code>ds</code></strong>, <strong><code>bs</code></strong>, <strong><code>random</code></strong>)</p>
+<h2 id="Batcher" class="doc_header"><code>class</code> <code>Batcher</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L192" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Batcher</code>(<strong><code>ds</code></strong>, <strong><code>bs</code></strong>, <strong><code>random</code></strong>)</p>
 </blockquote>
+<p>Wrapper for databunch class that randomizes each batch of output if <code>random</code> arg is set to trueu</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="Batcher.__iter__" class="doc_header"><code>Batcher.__iter__</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L196" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Batcher.__iter__</code>()</p>
+</blockquote>
+<p>When iter is called, random batches of the dataset are created</p>
 
 </div>
 
@@ -856,6 +937,22 @@ Parameter: torch.Size([10]), Requires grad: True
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[tensor([6, 5, 1, 7]), tensor([4, 3, 8, 2]), tensor([0, 9])]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -869,6 +966,22 @@ Parameter: torch.Size([10]), Requires grad: True
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[tensor([0, 1, 2, 3]), tensor([4, 5, 6, 7]), tensor([8, 9])]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -882,8 +995,9 @@ Parameter: torch.Size([10]), Requires grad: True
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="collate" class="doc_header"><code>collate</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L198" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>collate</code>(<strong><code>b</code></strong>)</p>
+<h4 id="collate" class="doc_header"><code>collate</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L202" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>collate</code>(<strong><code>b</code></strong>)</p>
 </blockquote>
+<p>Combines the input lists <code>b</code> into single inpuut and target tensors</p>
 
 </div>
 
@@ -902,8 +1016,9 @@ Parameter: torch.Size([10]), Requires grad: True
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DataLoader" class="doc_header"><code>class</code> <code>DataLoader</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L203" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataLoader</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
+<h2 id="DataLoader" class="doc_header"><code>class</code> <code>DataLoader</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L208" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataLoader</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
 </blockquote>
+<p>Refactored DataLoader to include a batcher, also collates the output of batcher into single tensor for model</p>
 
 </div>
 
@@ -931,8 +1046,9 @@ Parameter: torch.Size([10]), Requires grad: True
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fit" class="doc_header"><code>fit</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L210" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fit</code>(<strong><code>epochs</code></strong>, <strong><code>model</code></strong>, <strong><code>optim</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>train</code></strong>, <strong><code>valid</code></strong>)</p>
+<h4 id="fit" class="doc_header"><code>fit</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L216" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fit</code>(<strong><code>epochs</code></strong>, <strong><code>model</code></strong>, <strong><code>optim</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>train</code></strong>, <strong><code>valid</code></strong>)</p>
 </blockquote>
+<p>Fit function 4: Added validation loops, model training status as well as printing of some metrics</p>
 
 </div>
 
@@ -954,8 +1070,9 @@ Parameter: torch.Size([10]), Requires grad: True
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_datasets" class="doc_header"><code>get_datasets</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L235" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_datasets</code>()</p>
+<h4 id="get_datasets" class="doc_header"><code>get_datasets</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L242" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_datasets</code>()</p>
 </blockquote>
+<p>Helper function to return proper dataloaders</p>
 
 </div>
 
@@ -976,6 +1093,22 @@ Parameter: torch.Size([10]), Requires grad: True
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch 1, Accuracy: 0.9465565085411072, Loss: 0.18650124967098236
+Epoch 2, Accuracy: 0.9217754602432251, Loss: 0.24221312999725342
+Epoch 3, Accuracy: 0.9668591022491455, Loss: 0.11605237424373627
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 

@@ -5,12 +5,14 @@ __all__ = ['Reshape', 'Flatten', 'get_fan', 'get_gain', 'get_weight', 'Padding',
            'average_back', 'pool_back', 'Pool']
 
 # Cell
-from ModernArchitecuturesFromScratch.basic_operations_01 import *
-from ModernArchitecuturesFromScratch.fully_connected_network_02 import *
-from ModernArchitecuturesFromScratch.training_loop_03 import *
+from .basic_operations_01 import *
+from .fully_connected_network_02 import *
+from .model_training_03 import *
+from nbdev.showdoc import *
 
 # Cell
 class Reshape(Module):
+    "Module to reshape input tensor into tensor of (bs, `channels`, `size1`, `size2`)"
     def __init__(self, channels, size1, size2):
         super().__init__()
         self.size1 = size1
@@ -26,6 +28,7 @@ class Reshape(Module):
 
 # Cell
 class Flatten(Module):
+    "Module to flatten tensor input into shape (bs, rest)"
     def __init__(self):
         super().__init__()
 
@@ -42,14 +45,18 @@ class Flatten(Module):
 # Cell
 
 def get_fan(dim1, dim2, dim3, dim4, fan_out):
+    "Get the appropriate fan value based on the receptive field size and number of activations in the previous layer"
     if dim3 == None and dim4 == None: return dim1
     else:
         rec_fs = dim3*dim4
         return dim2*rec_fs if fan_out else dim1*rec_fs
 
-def get_gain(leak): return math.sqrt(2.0 / (1 + leak**2))
+def get_gain(leak):
+    "Get proper initialization gain factor based on the leak amount of the next layer. Leak of 1 if no ReLU after"
+    return math.sqrt(2.0 / (1 + leak**2))
 
 def get_weight(dim1, dim2, dim3 = None, dim4 = None, leak=1., fan_out=False):
+    "Improved Kaiming initialization to handle convolutional layers. Uses `get_gain` and `get_fan` to get appropriate values"
     fan = get_fan(dim1, dim2, dim3, dim4, fan_out)
     gain = get_gain(leak)
     std = gain / math.sqrt(fan)
@@ -58,6 +65,7 @@ def get_weight(dim1, dim2, dim3 = None, dim4 = None, leak=1., fan_out=False):
 
 # Cell
 class Padding():
+    "Adds padding around an image `size` pixels wide."
     def __init__(self, size=1, mode="constant", value=0):
         self.size, self.mode, self.value = size, mode, value
 
@@ -68,6 +76,7 @@ class Padding():
 
 # Cell
 def convolve(weight, filts, filts_bias, stride=1,padding=None):
+    "Performs a convolution on `weight` using the given `filts` and bias `filts_bias`. Can specify a `stride for the convolution or `padding` for the main image."
     n_filt, depth_f, f_w, f_h = filts.shape
     bs, depth_im, im_w, im_h = weight.shape
 
@@ -89,6 +98,7 @@ def convolve(weight, filts, filts_bias, stride=1,padding=None):
 
 # Cell
 def conv_back(out,inp,weight,bias,stride=1,padding=None):
+    "Performs a backward pass to get the gradient of the output, `out`, with respect to the `inp`, `weight` of filters and `bias`."
     dZ = out.g
 
     (A_prev, W, b, stride) = inp, weight.d, bias.d, stride
@@ -140,6 +150,7 @@ def conv_back(out,inp,weight,bias,stride=1,padding=None):
 # Cell
 
 class Conv(Module):
+    "Module to perform convolutions. Can specify kernel size, stride and padding"
     def __init__(self, n_in, n_out, kernel_size=3, stride=1, leak=1, padding=None):
         super().__init__()
         self.n_in, self.n_out = n_in, n_out
@@ -156,6 +167,7 @@ class Conv(Module):
     def __repr__(self): return f'Conv({self.n_in}, {self.n_out}, ks = {self.kernel_size}, stride = {self.stride})'
 
 # Cell
+#hide
 
 def get_linear_model(lr):
     model = SequentialModel(Linear(784, 50, True), ReLU(), Linear(50, 10, False))
@@ -171,6 +183,7 @@ def get_model(lr, modules):
 
 # Cell
 def get_small_datasets():
+    "Helper function to get smaller versions of MNIST datasets"
     xt, yt, xv, yv = get_mnist()
     tr = Dataset(xt[:500], yt[:500])
     val = Dataset(xv[:100], yv[:100])
@@ -179,10 +192,16 @@ def get_small_datasets():
     return train, valid
 
 # Cell
-def max_pool(inp): return inp.max(dim=-1).values.max(dim=-1).values
-def avg_pool(inp): return torch.mean(inp,dim=(2,3))
+def max_pool(inp):
+    "Applies a max pooling operation on `inp`"
+    return inp.max(dim=-1).values.max(dim=-1).values
+
+def avg_pool(inp):
+    "Applies an average pooling operation on `inp`"
+    return torch.mean(inp,dim=(2,3))
 
 def pool(inp, ks, stride, padding=None, operation=max_pool):
+    "Runs a pooling operation on `inp` of type `operation` with given `stride`, `ks` and `padding`"
     if padding is not None:
         if operation == max_pool: padding.value = inp.min() - 1
         inpp = padding(inp)
@@ -202,6 +221,7 @@ def pool(inp, ks, stride, padding=None, operation=max_pool):
 
 # Cell
 def max_back(window):
+    "Gradient for `window` of max pooling"
     A = torch.zeros(window.shape)
     bs, nc, _, _ = window.shape
 
@@ -213,11 +233,13 @@ def max_back(window):
 
 
 def average_back(window, shape):
+    "Gradient for `window` of average pooling"
     height, width = shape
     window_sum = window.unsqueeze(-1).unsqueeze(-1) / height*width
     return torch.ones(shape).unsqueeze(0).unsqueeze(0) * window_sum
 
 def pool_back(out, inp, ks, stride, padding=None, operation=max_pool):
+    "Function to pass gradient through pooling layers"
     dZ = out.g
 
     if padding is not None:
@@ -248,6 +270,7 @@ def pool_back(out, inp, ks, stride, padding=None, operation=max_pool):
 
 # Cell
 class Pool(Module):
+    "Module for defining a pooling layer in a model"
     def __init__(self, operation, ks=2, stride=2, padding=None):
         super().__init__()
         self.ks, self.stride, self.padding, self.operation = ks, stride, padding, operation

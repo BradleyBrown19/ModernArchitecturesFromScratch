@@ -173,6 +173,7 @@ class Optimizer():
 
 # Cell
 def get_model(lr):
+    "Easy helper function to get basic fully connected network with optimizer and loss function, takes learning rate, `lr`, as a parameter"
     model = SequentialModel(Linear(784, 50, True), ReLU(), Linear(50, 10, False))
     loss_func = CrossEntropy()
     optimizer = Optimizer(model.parameters(), lr)
@@ -180,7 +181,7 @@ def get_model(lr):
 
 # Cell
 class Dataset():
-
+    "Container class to store and get input and target values from a dataset"
     def __init__(self, x, y): self.x, self.y = x, y
 
     def __getitem__(self, i): return self.x[i], self.y[i]
@@ -189,18 +190,23 @@ class Dataset():
 
 # Cell
 class Batcher():
-    def __init__(self, ds, bs, random): self.n, self.bs, self.rand = len(ds), bs, random
+    "Wrapper for databunch class that randomizes each batch of output if `random` arg is set to trueu"
+    def __init__(self, ds, bs, random):
+        self.n, self.bs, self.rand = len(ds), bs, random
     def __iter__(self):
+        "When iter is called, random batches of the dataset are created"
         self.idxs = torch.randperm(self.n) if self.rand else torch.arange(self.n)
         for i in range(0, self.n, self.bs): yield self.idxs[i:i+self.bs]
 
 # Cell
 def collate(b):
+    "Combines the input lists `b` into single inpuut and target tensors"
     xb, yb = zip(*b)
     return torch.stack(xb), torch.stack(yb)
 
 
 class DataLoader():
+    "Refactored DataLoader to include a batcher, also collates the output of batcher into single tensor for model"
     def __init__(self, ds, batcher, collate_fcn): self.ds, self.batcher, self.collate_fcn = ds, batcher, collate_fcn
     def __iter__(self):
         for b in self.batcher: yield self.collate_fcn([self.ds[i] for i in b])
@@ -208,6 +214,7 @@ class DataLoader():
 
 # Cell
 def fit(epochs, model, optim, loss_func, train, valid):
+    "Fit function 4: Added validation loops, model training status as well as printing of some metrics"
     for epoch in range(epochs):
 
         model.training = True
@@ -233,6 +240,7 @@ def fit(epochs, model, optim, loss_func, train, valid):
 
 # Cell
 def get_datasets():
+    "Helper function to return proper dataloaders"
     xt, yt, xv, yv = get_mnist()
     tr = Dataset(xt, yt)
     val = Dataset(xv, yv)

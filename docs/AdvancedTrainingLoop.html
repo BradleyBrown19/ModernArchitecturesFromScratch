@@ -43,8 +43,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/training_loop_03.py#L147" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
+<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L183" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
 </blockquote>
+<p>Container class to store and get input and target values from a dataset</p>
 
 </div>
 
@@ -63,8 +64,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DataLoader" class="doc_header"><code>class</code> <code>DataLoader</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/training_loop_03.py#L168" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataLoader</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
+<h2 id="DataLoader" class="doc_header"><code>class</code> <code>DataLoader</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L208" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataLoader</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
 </blockquote>
+<p>Refactored DataLoader to include a batcher, also collates the output of batcher into single tensor for model</p>
 
 </div>
 
@@ -76,6 +78,9 @@ summary: "summary"
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -83,8 +88,9 @@ summary: "summary"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Databunch" class="doc_header"><code>class</code> <code>Databunch</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L30" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Databunch</code>(<strong><code>train_dl</code></strong>, <strong><code>valid_dl</code></strong>)</p>
+<h2 id="Databunch" class="doc_header"><code>class</code> <code>Databunch</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L32" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Databunch</code>(<strong><code>train_dl</code></strong>, <strong><code>valid_dl</code></strong>)</p>
 </blockquote>
+<p>Wrapper to combine training and validation datasets</p>
 
 </div>
 
@@ -100,11 +106,13 @@ summary: "summary"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_databunch</span><span class="p">(</span><span class="n">xt</span><span class="p">,</span> <span class="n">yt</span><span class="p">,</span> <span class="n">xv</span><span class="p">,</span> <span class="n">yv</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
+    <span class="s2">&quot;Helper function to get a databunch of given `bs`&quot;</span>
     <span class="n">t_data</span><span class="p">,</span> <span class="n">v_data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">xt</span><span class="p">,</span> <span class="n">yt</span><span class="p">),</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">xv</span><span class="p">,</span> <span class="n">yv</span><span class="p">)</span>
     <span class="n">t_dl</span><span class="p">,</span> <span class="n">v_dl</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">t_data</span><span class="p">,</span> <span class="n">Batcher</span><span class="p">(</span><span class="n">t_data</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="n">collate</span><span class="p">),</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">t_data</span><span class="p">,</span> <span class="n">Batcher</span><span class="p">(</span><span class="n">t_data</span><span class="p">,</span> <span class="n">bs</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span> <span class="n">collate</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Databunch</span><span class="p">(</span><span class="n">t_dl</span><span class="p">,</span> <span class="n">v_dl</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">get_mnist_databunch</span><span class="p">():</span>
+    <span class="s2">&quot;Grabs MNIST databuunch usuing `get_mnist` and `get_databunch`&quot;</span>
     <span class="k">return</span> <span class="n">get_databunch</span><span class="p">(</span><span class="o">*</span><span class="n">get_mnist</span><span class="p">())</span>
 </pre></div>
 
@@ -171,90 +179,144 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Learner</span><span class="p">():</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">db</span><span class="p">):</span>
+        <span class="s2">&quot;Wrapper for model, loss function, optimizer and databunch&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_func</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">db</span>
-    
-    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="p">):</span>
-        <span class="n">opt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">training</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="k">for</span> <span class="n">xb</span><span class="p">,</span> <span class="n">yb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">train</span><span class="p">:</span>
-                <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">xb</span><span class="p">),</span> <span class="n">yb</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">loss_func</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-
-                <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-                <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">training</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="n">acc</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">epochs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
-            <span class="k">for</span> <span class="n">xb</span><span class="p">,</span> <span class="n">yb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">valid</span><span class="p">:</span>
-                <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
-                <span class="n">acc</span> <span class="o">+=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">yb</span><span class="p">)</span>
-                <span class="n">loss</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss_func</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">yb</span><span class="p">)</span>
-                <span class="n">epochs</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">acc</span> <span class="o">/=</span> <span class="n">epochs</span>
-            <span class="n">loss</span> <span class="o">/=</span> <span class="n">epochs</span>
-
-            <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Epoch {epoch+1}, Accuracy: </span><span class="si">{acc}</span><span class="s1">, Loss: </span><span class="si">{loss}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Runner">Runner<a class="anchor-link" href="#Runner">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">modules</span> <span class="o">=</span> <span class="p">[</span><span class="n">Linear</span><span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-           <span class="n">ReLU</span><span class="p">(),</span>
-           <span class="n">Linear</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">False</span><span class="p">)]</span>
-<span class="n">m</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">loss_func</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">modules</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span> <span class="o">=</span> <span class="n">Learner</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">,</span> <span class="n">Optimizer</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Epoch 1, Accuracy: 0.9447170495986938, Loss: 0.18049047887325287
-Epoch 2, Accuracy: 0.9536165595054626, Loss: 0.14963838458061218
-Epoch 3, Accuracy: 0.9769781231880188, Loss: 0.07752970606088638
-</pre>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="Runner" class="doc_header"><code>class</code> <code>Runner</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L45" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Runner</code>(<strong><code>learner</code></strong>, <strong><code>cbs</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>All encompossing class to train a model with specific callbacks</p>
+
 </div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="Runner.__init__" class="doc_header"><code>Runner.__init__</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Runner.__init__</code>(<strong><code>learner</code></strong>, <strong><code>cbs</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="Runner.do_one_batch" class="doc_header"><code>Runner.do_one_batch</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L65" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Runner.do_one_batch</code>(<strong><code>xb</code></strong>, <strong><code>yb</code></strong>)</p>
+</blockquote>
+<p>Applies forward and backward passes of model to one batch</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="Runner.do_all_batches" class="doc_header"><code>Runner.do_all_batches</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L85" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Runner.do_all_batches</code>(<strong><code>dl</code></strong>)</p>
+</blockquote>
+<p>Runs every batch of a dataloader through <code>do_one_batch</code></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="Runner.fit" class="doc_header"><code>Runner.fit</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L97" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Runner.fit</code>(<strong><code>epochs</code></strong>, <strong><code>lr</code></strong>=<em><code>0.1</code></em>)</p>
+</blockquote>
+<p>Method to fit the model <code>epoch</code> times using learning rate <code>lr</code></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="Runner.check_callbacks" class="doc_header"><code>Runner.check_callbacks</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Runner.check_callbacks</code>(<strong><code>state</code></strong>)</p>
+</blockquote>
+<p>Helper functions to run through each callback, calling it's state method if applicable</p>
+
+</div>
+
 </div>
 
 </div>
@@ -279,8 +341,9 @@ Epoch 3, Accuracy: 0.9769781231880188, Loss: 0.07752970606088638
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Runner" class="doc_header"><code>class</code> <code>Runner</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L42" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Runner</code>(<strong><code>learner</code></strong>, <strong><code>cbs</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="Callback" class="doc_header"><code>class</code> <code>Callback</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L119" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Callback</code>()</p>
 </blockquote>
+<p>Base class for callbacks, defines order of execution and allows abstraction of self to runner class</p>
 
 </div>
 
@@ -302,28 +365,9 @@ Epoch 3, Accuracy: 0.9769781231880188, Loss: 0.07752970606088638
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Callback" class="doc_header"><code>class</code> <code>Callback</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L111" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Callback</code>()</p>
+<h2 id="TrainEvalCallback" class="doc_header"><code>class</code> <code>TrainEvalCallback</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L129" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TrainEvalCallback</code>() :: <a href="/ModernArchitecturesFromScratch/AdvancedTrainingLoop#Callback"><code>Callback</code></a></p>
 </blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="TrainEvalCallback" class="doc_header"><code>class</code> <code>TrainEvalCallback</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L119" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TrainEvalCallback</code>() :: <a href="/ModernArchitecuturesFromScratch/AdvancedTrainingLoop#Callback"><code>Callback</code></a></p>
-</blockquote>
+<p>Keeps track of training/eval mode of model and progress through training</p>
 
 </div>
 
@@ -345,8 +389,9 @@ Epoch 3, Accuracy: 0.9769781231880188, Loss: 0.07752970606088638
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Stat" class="doc_header"><code>class</code> <code>Stat</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L140" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Stat</code>(<strong><code>calc</code></strong>)</p>
+<h2 id="Stat" class="doc_header"><code>class</code> <code>Stat</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L151" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Stat</code>(<strong><code>calc</code></strong>)</p>
 </blockquote>
+<p>Defines a metric to keep track of through training, metric calculated using <code>calc</code></p>
 
 </div>
 
@@ -365,8 +410,9 @@ Epoch 3, Accuracy: 0.9769781231880188, Loss: 0.07752970606088638
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="StatTracker" class="doc_header"><code>class</code> <code>StatTracker</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L151" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>StatTracker</code>(<strong><code>metrics</code></strong>, <strong><code>in_train</code></strong>)</p>
+<h2 id="StatTracker" class="doc_header"><code>class</code> <code>StatTracker</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L163" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>StatTracker</code>(<strong><code>metrics</code></strong>, <strong><code>in_train</code></strong>)</p>
 </blockquote>
+<p>Class to implement thet <a href="/ModernArchitecturesFromScratch/AdvancedTrainingLoop#Stats"><code>Stats</code></a> callback using metrics of class <a href="/ModernArchitecturesFromScratch/AdvancedTrainingLoop#Stat"><code>Stat</code></a></p>
 
 </div>
 
@@ -385,8 +431,9 @@ Epoch 3, Accuracy: 0.9769781231880188, Loss: 0.07752970606088638
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Stats" class="doc_header"><code>class</code> <code>Stats</code><a href="https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch/tree/master/ModernArchitecuturesFromScratch/advanced_training_loop_05.py#L177" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Stats</code>(<strong><code>metrics</code></strong>) :: <a href="/ModernArchitecuturesFromScratch/AdvancedTrainingLoop#Callback"><code>Callback</code></a></p>
+<h2 id="Stats" class="doc_header"><code>class</code> <code>Stats</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/advanced_training_loop_05.py#L191" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Stats</code>(<strong><code>metrics</code></strong>) :: <a href="/ModernArchitecturesFromScratch/AdvancedTrainingLoop#Callback"><code>Callback</code></a></p>
 </blockquote>
+<p>Callback to keep track of <code>metrics</code></p>
 
 </div>
 
@@ -418,6 +465,34 @@ Epoch 3, Accuracy: 0.9769781231880188, Loss: 0.07752970606088638
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch: 1
+Train: Loss: 0.00012180877820355818, Accuracy: 0.9136000275611877
+Valid: Loss: 0.0002788938581943512, Accuracy: 0.9381999969482422
+Epoch: 2
+Train: Loss: 4.875722515862435e-05, Accuracy: 0.9558600187301636
+Valid: Loss: 0.00014287835801951587, Accuracy: 0.9671800136566162
+Epoch: 3
+Train: Loss: 0.00010866371303563938, Accuracy: 0.966920018196106
+Valid: Loss: 0.00022182443353813142, Accuracy: 0.9489399790763855
+Epoch: 4
+Train: Loss: 5.4490061302203685e-05, Accuracy: 0.9728999733924866
+Valid: Loss: 7.179772364906967e-05, Accuracy: 0.9632599949836731
+Epoch: 5
+Train: Loss: 4.08835694543086e-05, Accuracy: 0.9775000214576721
+Valid: Loss: 8.388313290197402e-05, Accuracy: 0.9725599884986877
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 

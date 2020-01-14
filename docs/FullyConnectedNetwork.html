@@ -1,11 +1,11 @@
 ---
 
-title: Title
+title: Fully Connected Network
 
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "summary"
+summary: "Implementing backward and forward passes to train a simple fully connected network"
 ---
 <!--
 
@@ -88,10 +88,10 @@ summary: "summary"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor([[ 0.2841, -0.9401, -0.4223, -0.7115,  0.5532],
-        [-0.1580,  0.7566, -0.7379,  0.7424,  0.1979],
-        [ 0.0763,  0.7963,  0.1251, -0.9009, -0.6070],
-        [-0.2342, -0.1588,  1.0073, -0.2527, -0.7623]])</pre>
+<pre>tensor([[ 0.3439, -0.8647, -0.3632, -0.4948,  0.1206],
+        [ 1.1526,  0.0320, -0.1779,  0.0031, -0.5851],
+        [-0.7234,  0.7781, -0.2957, -0.2883, -0.0954],
+        [ 0.8227, -0.4535, -0.2321,  0.4181,  0.5786]])</pre>
 </div>
 
 </div>
@@ -255,11 +255,155 @@ summary: "summary"
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">mse_grad</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">targ</span><span class="p">):</span>
+    <span class="s2">&quot;Grad for mean squared error&quot;</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">targ</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">inp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">rel_grad</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">out</span><span class="p">):</span>
+    <span class="s2">&quot;Grad for ReLU layer&quot;</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="p">(</span><span class="n">inp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">lin_grad</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="s2">&quot;Grad for linear layer&quot;</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span> <span class="o">@</span> <span class="n">w</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">softmax_cross_grad</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">targ</span><span class="p">):</span>
+    <span class="s2">&quot;Grad for softmax and cross entropy loss&quot;</span>
+    <span class="n">targ</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">one_hot</span><span class="p">(</span><span class="n">targ</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">inp_s</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span> <span class="n">inp_s</span> <span class="o">-</span> <span class="n">targ</span> <span class="p">)</span> <span class="o">/</span> <span class="n">targ</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Testing-vs-Pytorch-Gradient">Testing vs Pytorch Gradient<a class="anchor-link" href="#Testing-vs-Pytorch-Gradient">&#182;</a></h1>
+<p>Putting it all together...</p>
+
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">full_pass</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span> <span class="n">targ</span><span class="p">):</span>
+    <span class="n">l1</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
+    <span class="n">l1_r</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
+    <span class="n">l2</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">l1_r</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+    
+    <span class="n">soft</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span>
+    
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">cross_entropy</span><span class="p">(</span><span class="n">soft</span><span class="p">,</span> <span class="n">targ</span><span class="p">)</span>
+    
+    <span class="n">softmax_cross_grad</span><span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">targ</span><span class="p">)</span>
+    <span class="n">lin_grad</span><span class="p">(</span><span class="n">l1_r</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+    <span class="n">rel_grad</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l1_r</span><span class="p">)</span>
+    <span class="n">lin_grad</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">loss</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">full_pass</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span> <span class="n">targ</span><span class="p">):</span>
+    <span class="n">l1</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
+    <span class="n">l1_r</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
+    <span class="n">l2</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">l1_r</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+
+    <span class="n">soft</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span>
+
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">cross_entropy</span><span class="p">(</span><span class="n">soft</span><span class="p">,</span> <span class="n">targ</span><span class="p">)</span>
+
+    <span class="n">softmax_cross_grad</span><span class="p">(</span><span class="n">l2</span><span class="p">,</span> <span class="n">targ</span><span class="p">)</span>
+    <span class="n">lin_grad</span><span class="p">(</span><span class="n">l1_r</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">)</span>
+    <span class="n">rel_grad</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l1_r</span><span class="p">)</span>
+    <span class="n">lin_grad</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span> <span class="n">l1</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">loss</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">loss</span> <span class="o">=</span> <span class="n">full_pass</span><span class="p">(</span><span class="n">xt</span><span class="p">,</span> <span class="n">yt</span><span class="p">)</span>
+<span class="n">loss</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor(2.9962)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -654,8 +798,8 @@ summary: "summary"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 201 ms, sys: 21.6 ms, total: 223 ms
-Wall time: 55.9 ms
+<pre>CPU times: user 227 ms, sys: 24.3 ms, total: 251 ms
+Wall time: 62.9 ms
 </pre>
 </div>
 </div>
@@ -682,8 +826,8 @@ Wall time: 55.9 ms
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 827 ms, sys: 50.6 ms, total: 878 ms
-Wall time: 129 ms
+<pre>CPU times: user 796 ms, sys: 48.3 ms, total: 845 ms
+Wall time: 124 ms
 </pre>
 </div>
 </div>

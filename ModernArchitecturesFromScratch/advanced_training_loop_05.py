@@ -4,14 +4,15 @@ __all__ = ['Dataset', 'DataLoader', 'Databunch', 'Runner', 'Callback', 'TrainEva
            'Stats']
 
 # Cell
-from ModernArchitecuturesFromScratch.basic_operations_01 import *
-from ModernArchitecuturesFromScratch.fully_connected_network_02 import *
-from ModernArchitecuturesFromScratch.training_loop_03 import *
-from ModernArchitecuturesFromScratch.convolutions_pooling_04 import *
-
-# Cell
+from .basic_operations_01 import *
+from .fully_connected_network_02 import *
+from .model_training_03 import *
+from .convolutions_pooling_04 import *
+from nbdev.showdoc import *
 import math
 
+# Cell
+#hide
 class Dataset():
     def __init__(self, x, y): self.x, self.y = x, y
     def __getitem__(self, i): return self.x[i], self.y[i]
@@ -27,7 +28,9 @@ class DataLoader():
     def __len__(self): return math.ceil(len(self.ds) / self.batcher.bs)
     def __repr__(self): return f'Data: {self.ds}, bs = {self.batcher.bs}'
 
+# Cell
 class Databunch():
+    "Wrapper to combine training and validation datasets"
     def __init__(self, train_dl, valid_dl): self.train, self.valid = train_dl, valid_dl
 
     @property
@@ -40,6 +43,7 @@ class Databunch():
 
 # Cell
 class Runner():
+    "All encompossing class to train a model with specific callbacks"
     def __init__(self, learner, cbs=None):
         cbs = [] if cbs is None else cbs
         self.stop,self.cbs = False,[TrainEvalCallback()]+cbs
@@ -59,6 +63,7 @@ class Runner():
     def databunch(self): return self.learner.db
 
     def do_one_batch(self, xb, yb):
+        "Applies forward and backward passes of model to one batch"
         self.xb, self.yb = xb, yb
 
         self.pred = self.learner.model(xb)
@@ -78,6 +83,7 @@ class Runner():
         if self.check_callbacks('after_zero_grad'): return
 
     def do_all_batches(self, dl):
+        "Runs every batch of a dataloader through `do_one_batch`"
         self.iters, self.iters_done = len(dl), 0
         for xb, yb in dl:
             if self.stop: break
@@ -89,6 +95,7 @@ class Runner():
         self.stop = False
 
     def fit(self, epochs, lr=0.1):
+        "Method to fit the model `epoch` times using learning rate `lr`"
         self.lr, self.epochs = lr, epochs
         if self.check_callbacks('before_fit'): return
 
@@ -102,6 +109,7 @@ class Runner():
         if self.check_callbacks('after_fit'): return
 
     def check_callbacks(self, state):
+        "Helper functions to run through each callback, calling it's state method if applicable"
         for cb in sorted(self.cbs, key=lambda x: x._order):
             f = getattr(cb, state, None)
             if f and f(): return True
@@ -109,6 +117,7 @@ class Runner():
 
 # Cell
 class Callback():
+    "Base class for callbacks, defines order of execution and allows abstraction of self to runner class"
     _order = 0
     def __getattr__(self,k):
         #If callback doesn't have an attribute, check the runner
@@ -116,7 +125,9 @@ class Callback():
 
     def __repr__(self): return f'{self.__class__.__name__}'
 
+# Cell
 class TrainEvalCallback(Callback):
+    "Keeps track of training/eval mode of model and progress through training"
     _order = 10
 
     def before_fit(self):
@@ -138,6 +149,7 @@ class TrainEvalCallback(Callback):
 
 # Cell
 class Stat():
+    "Defines a metric to keep track of through training, metric calculated using `calc`"
     def __init__(self, calc): self.calc, self.value, self.count = calc, 0., 0
 
     def __call__(self, bs, *args):
@@ -149,6 +161,7 @@ class Stat():
     def __repr__(self): return f'{(self.calc.__name__).capitalize()}: {self.value / self.count}' if self.count > 0 else f'{(self.calc.__name__).capitalize()}'
 
 class StatTracker():
+    "Class to implement thet `Stats` callback using metrics of class `Stat`"
     def __init__(self, metrics, in_train):
         self.in_train = in_train
         self.metrics = [Stat(m) for m in metrics]
@@ -160,6 +173,7 @@ class StatTracker():
     def __len__(self): return len(self.metrics)
 
     def accumulate(self, run):
+        "Scales the metric value by the amount of data in each batch"
         bs = run.xb.shape[0]
         self.tot_loss = run.loss * bs
         self.count += bs
@@ -175,6 +189,7 @@ class StatTracker():
             return f'{"Train" if self.in_train else "Valid"}: {printed_stats}'
 
 class Stats(Callback):
+    "Callback to keep track of `metrics`"
     def __init__(self, metrics):
         self.train, self.valid = StatTracker(metrics, True), StatTracker(metrics, False)
 
