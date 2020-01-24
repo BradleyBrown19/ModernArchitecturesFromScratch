@@ -327,6 +327,7 @@ class HyperRecorder(Callback):
         plt.plot(self.losses)
 
 # Cell
+#hide
 class Learner():
     def __init__(self, model, loss_func, optimizer, db, lr=0.5):
         "Wrapper for model, loss function, optimizer and databunch"
@@ -346,6 +347,7 @@ def loss(preds, targ, loss, **kwargs):
     return loss
 
 # Cell
+#hide
 class Stat():
     "Defines a metric to keep track of through training, metric calculated using `calc`"
     def __init__(self, calc): self.calc, self.value, self.count = calc, 0., 0

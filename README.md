@@ -10,10 +10,10 @@
 
 # Modern Architectures from Scratch
 
-> Recreating recent and notable deep learning architectures from scratch using only built in python functionality and basic tensor operation. No other Pytorch or Tensorflow. Architectures include ResNet and BERT.
+> Recreating recent and notable deep learning architectures from scratch using only built in python functionality. No PyTorch or Tensorflow (except for the tensor class from PyTorch). Nothing else was used (not even gradient calculations (AutoGrad) or modules)
 
 
-# How to Use
+## How to Use
 
 Import desired modules:
 ```python

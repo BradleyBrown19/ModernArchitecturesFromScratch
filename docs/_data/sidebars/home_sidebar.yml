@@ -21,6 +21,15 @@ entries:
     - output: web,pdf
       title: Callbacks
       url: Callbacks
+    - output: web,pdf
+      title: Batchnorm
+      url: Batchnorm
+    - output: web,pdf
+      title: Advanced Optimizers
+      url: Optimizers
+    - output: web,pdf
+      title: ResNet
+      url: ResNet
     output: web
     title: Notebook
   output: web

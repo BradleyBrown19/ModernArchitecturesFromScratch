@@ -88,10 +88,10 @@ summary: "Implementing backward and forward passes to train a simple fully conne
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor([[ 0.3439, -0.8647, -0.3632, -0.4948,  0.1206],
-        [ 1.1526,  0.0320, -0.1779,  0.0031, -0.5851],
-        [-0.7234,  0.7781, -0.2957, -0.2883, -0.0954],
-        [ 0.8227, -0.4535, -0.2321,  0.4181,  0.5786]])</pre>
+<pre>tensor([[ 0.1757,  0.2658, -0.8053,  0.5641, -0.9632],
+        [-0.6773,  0.5323,  1.2266, -1.5374, -0.1655],
+        [-0.0217, -1.1855,  0.1367,  1.1296,  0.1197],
+        [ 0.4580,  0.3639,  0.4997,  0.0106,  0.4932]])</pre>
 </div>
 
 </div>
@@ -374,7 +374,7 @@ summary: "Implementing backward and forward passes to train a simple fully conne
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>tensor(2.9962)</pre>
+<pre>tensor(2.6315)</pre>
 </div>
 
 </div>
@@ -415,51 +415,6 @@ summary: "Implementing backward and forward passes to train a simple fully conne
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="Module.__call__" class="doc_header"><code>Module.__call__</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Module.__call__</code>(<strong>*<code>args</code></strong>)</p>
-</blockquote>
-<p>Executes forward pass of module and stores result in <code>self.out</code> for backwards pass</p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="Module.forward" class="doc_header"><code>Module.forward</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L57" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Module.forward</code>()</p>
-</blockquote>
-<p>Executes desired operation of module</p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="Module.backward" class="doc_header"><code>Module.backward</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Module.backward</code>()</p>
-</blockquote>
-<p>Calls backwards method to find gradient with stored output of layer</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -473,51 +428,6 @@ summary: "Implementing backward and forward passes to train a simple fully conne
 <h2 id="Linear" class="doc_header"><code>class</code> <code>Linear</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L66" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Linear</code>(<strong><code>in_d</code></strong>, <strong><code>out_d</code></strong>, <strong><code>final</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
 </blockquote>
 <p>Base class for every layer operation in a sequential network</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="Linear.__init__" class="doc_header"><code>Linear.__init__</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L67" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Linear.__init__</code>(<strong><code>in_d</code></strong>, <strong><code>out_d</code></strong>, <strong><code>final</code></strong>)</p>
-</blockquote>
-<p>Initialize weight using 'get_weight' and bias to 0 for linear operation</p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="Linear.forward" class="doc_header"><code>Linear.forward</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Linear.forward</code>(<strong><code>xb</code></strong>)</p>
-</blockquote>
-<p>Perform forward linear pass</p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="Linear.bwd" class="doc_header"><code>Linear.bwd</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L75" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Linear.bwd</code>(<strong><code>out</code></strong>, <strong><code>inp</code></strong>)</p>
-</blockquote>
-<p>Gradient with respect to the forward linear layer</p>
 
 </div>
 
@@ -553,39 +463,6 @@ summary: "Implementing backward and forward passes to train a simple fully conne
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="ReLU.forward" class="doc_header"><code>ReLU.forward</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L83" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ReLU.forward</code>(<strong><code>x</code></strong>)</p>
-</blockquote>
-<p>Set all activations to have a minimum of zero, subtract 0.5 to maintain mean of 0</p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="ReLU.bwd" class="doc_header"><code>ReLU.bwd</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L87" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ReLU.bwd</code>(<strong><code>out</code></strong>, <strong><code>inp</code></strong>)</p>
-</blockquote>
-<p>Backward with respect to the ReLU layer</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -599,63 +476,6 @@ summary: "Implementing backward and forward passes to train a simple fully conne
 <h2 id="CrossSoft" class="doc_header"><code>class</code> <code>CrossSoft</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L93" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CrossSoft</code>() :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
 </blockquote>
 <p>Base class for every layer operation in a sequential network</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="CrossSoft.forward" class="doc_header"><code>CrossSoft.forward</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L94" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>CrossSoft.forward</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
-</blockquote>
-<p>Calls <code>soft_forward</code> and <code>cross_loss</code> on inp compared with <code>targ</code></p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="CrossSoft.soft_forward" class="doc_header"><code>CrossSoft.soft_forward</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L99" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>CrossSoft.soft_forward</code>(<strong><code>x</code></strong>)</p>
-</blockquote>
-<p>Implements softmax activation function on <code>x</code></p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="CrossSoft.cross_loss" class="doc_header"><code>CrossSoft.cross_loss</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L103" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>CrossSoft.cross_loss</code>(<strong><code>xb</code></strong>, <strong><code>targ</code></strong>)</p>
-</blockquote>
-<p>Cross entropy loss of <code>xb</code> compared to <code>targ</code></p>
-
-</div>
-
-</div>
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="CrossSoft.bwd" class="doc_header"><code>CrossSoft.bwd</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/fully_connected_network_02.py#L107" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>CrossSoft.bwd</code>(<strong><code>loss</code></strong>, <strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
-</blockquote>
-<p>Gradient with respect to both softmax and cross entropy loss</p>
 
 </div>
 
@@ -776,8 +596,8 @@ summary: "Implementing backward and forward passes to train a simple fully conne
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 227 ms, sys: 24.3 ms, total: 251 ms
-Wall time: 62.9 ms
+<pre>CPU times: user 232 ms, sys: 32 ms, total: 264 ms
+Wall time: 75.1 ms
 </pre>
 </div>
 </div>
@@ -804,8 +624,8 @@ Wall time: 62.9 ms
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>CPU times: user 796 ms, sys: 48.3 ms, total: 845 ms
-Wall time: 124 ms
+<pre>CPU times: user 764 ms, sys: 88.2 ms, total: 852 ms
+Wall time: 144 ms
 </pre>
 </div>
 </div>

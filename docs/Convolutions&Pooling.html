@@ -340,7 +340,7 @@ Std: 0.945578396320343
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Forward">Forward<a class="anchor-link" href="#Forward">&#182;</a></h1>
+<h2 id="Forward">Forward<a class="anchor-link" href="#Forward">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -614,7 +614,7 @@ Std: 0.945578396320343
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Backward">Backward<a class="anchor-link" href="#Backward">&#182;</a></h1>
+<h2 id="Backward">Backward<a class="anchor-link" href="#Backward">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -695,6 +695,12 @@ Std: 0.945578396320343
     <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">dA_prev</span>
 </pre></div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Training">Training<a class="anchor-link" href="#Training">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1059,6 +1065,12 @@ Epoch 2, Accuracy: 0.7638888955116272, Loss: 0.7222617268562317
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Forward">Forward<a class="anchor-link" href="#Forward">&#182;</a></h2>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
@@ -1234,7 +1246,7 @@ good
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Backwards-Passes">Backwards Passes<a class="anchor-link" href="#Backwards-Passes">&#182;</a></h1>
+<h2 id="Backward">Backward<a class="anchor-link" href="#Backward">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1336,6 +1348,12 @@ good
     <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">dA_prev</span>
 </pre></div>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Module">Module<a class="anchor-link" href="#Module">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -1476,147 +1494,6 @@ good
 <pre>tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.], requires_grad=True)</pre>
 </div>
 
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">loss</span> <span class="o">=</span> <span class="n">loss_func</span><span class="p">(</span><span class="n">m</span><span class="p">(</span><span class="n">sx2</span><span class="p">),</span> <span class="n">sy</span><span class="p">)</span>
-<span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cw</span><span class="o">*</span><span class="mi">2</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>tensor([[[[ 0.0627,  0.3011,  0.2769],
-          [ 0.3184,  0.4685,  0.3356],
-          [ 0.6687,  1.0072,  0.6248]]],
-
-
-        [[[ 1.3921,  0.9514,  0.2135],
-          [ 1.3554,  0.5316, -0.2174],
-          [ 1.0866,  0.1363, -0.4313]]],
-
-
-        [[[ 0.2056,  0.2428,  0.2551],
-          [ 0.3247,  0.3450,  0.1667],
-          [ 0.6809,  0.7636,  0.3830]]],
-
-
-        [[[ 0.2597,  0.7185,  0.6363],
-          [ 1.1045,  1.2026,  0.7191],
-          [ 1.7085,  1.4304,  0.6249]]]])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">grad</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>tensor([[[[ 0.0078,  0.0376,  0.0346],
-          [ 0.0398,  0.0586,  0.0420],
-          [ 0.0836,  0.1259,  0.0781]]],
-
-
-        [[[ 0.1740,  0.1189,  0.0267],
-          [ 0.1694,  0.0665, -0.0272],
-          [ 0.1358,  0.0170, -0.0539]]],
-
-
-        [[[ 0.0257,  0.0303,  0.0319],
-          [ 0.0406,  0.0431,  0.0208],
-          [ 0.0851,  0.0954,  0.0479]]],
-
-
-        [[[ 0.0325,  0.0898,  0.0795],
-          [ 0.1381,  0.1503,  0.0899],
-          [ 0.2136,  0.1788,  0.0781]]]])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_near</span><span class="p">(</span><span class="n">sxg</span><span class="p">,</span> <span class="n">sx2</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
-<span class="n">test_near</span><span class="p">(</span><span class="n">cw</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
-<span class="n">test_near</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
-<span class="n">test_near</span><span class="p">(</span><span class="n">lw</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
-<span class="n">test_near</span><span class="p">(</span><span class="n">lb</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>not near
-not near
-not near
-good
-good
-</pre>
-</div>
 </div>
 
 </div>
