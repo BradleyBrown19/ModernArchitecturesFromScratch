@@ -17,10 +17,10 @@ entries:
       url: ModelTraining
     - output: web,pdf
       title: Convolutions and Pooling
-      url: ConvolutionsAndPooling
+      url: Convolutions&Pooling
     - output: web,pdf
       title: Callbacks
-      url: callbacks
+      url: Callbacks
     output: web
     title: Notebook
   output: web

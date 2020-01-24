@@ -4,6 +4,9 @@
     "Fully Connected Network": "FullyConnectedNetwork",
     "Model Training": "ModelTraining",
     "Convolutions and Pooling": "Convolutions&Pooling",
-    "Callbacks": "Callbacks"
+    "Callbacks": "Callbacks",
+    "Batchnorm": "Batchnorm",
+    "Advanced Optimizers": "Optimizers",
+    "ResNet": "ResNet"
   }
 }

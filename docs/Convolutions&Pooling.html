@@ -370,6 +370,32 @@ Std: 0.945578396320343
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convolve</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">filts</span><span class="p">,</span> <span class="n">filts_bias</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">padding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">n_filt</span><span class="p">,</span> <span class="n">depth_f</span><span class="p">,</span> <span class="n">f_w</span><span class="p">,</span> <span class="n">f_h</span> <span class="o">=</span> <span class="n">filts</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">bs</span><span class="p">,</span> <span class="n">depth_im</span><span class="p">,</span> <span class="n">im_w</span><span class="p">,</span> <span class="n">im_h</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="k">if</span> <span class="n">padding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> 
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">padding</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+        <span class="n">p_s</span> <span class="o">=</span> <span class="n">padding</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">p_s</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">p_w</span><span class="p">,</span> <span class="n">p_h</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="k">assert</span> <span class="n">depth_f</span> <span class="o">==</span> <span class="n">depth_im</span>
+
+    <span class="n">final</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">n_filt</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">im_w</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_s</span> <span class="o">-</span> <span class="n">f_w</span><span class="p">)</span><span class="o">/</span><span class="n">stride</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">im_h</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_s</span> <span class="o">-</span> <span class="n">f_h</span><span class="p">)</span><span class="o">/</span><span class="n">stride</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p_w</span><span class="o">-</span><span class="n">f_h</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">stride</span><span class="p">):</span> <span class="c1">#vertical passes</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p_h</span><span class="o">-</span><span class="n">f_w</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">stride</span><span class="p">):</span> <span class="c1">#horizontal passes</span>
+            <span class="n">final</span><span class="p">[:,:,</span><span class="n">j</span><span class="o">//</span><span class="n">stride</span><span class="p">,</span><span class="n">k</span><span class="o">//</span><span class="n">stride</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">weight</span><span class="p">[:,:,</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="n">f_h</span><span class="p">,</span><span class="n">k</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="n">f_w</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">filts</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">filts_bias</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">final</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>Testing against PyTorch's convolution:</p>
 
 </div>
@@ -515,32 +541,6 @@ Std: 0.945578396320343
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convolve</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">filts</span><span class="p">,</span> <span class="n">filts_bias</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">padding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="n">n_filt</span><span class="p">,</span> <span class="n">depth_f</span><span class="p">,</span> <span class="n">f_w</span><span class="p">,</span> <span class="n">f_h</span> <span class="o">=</span> <span class="n">filts</span><span class="o">.</span><span class="n">shape</span>
-    <span class="n">bs</span><span class="p">,</span> <span class="n">depth_im</span><span class="p">,</span> <span class="n">im_w</span><span class="p">,</span> <span class="n">im_h</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">shape</span>
-
-    <span class="k">if</span> <span class="n">padding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span> 
-        <span class="n">weight</span> <span class="o">=</span> <span class="n">padding</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
-        <span class="n">p_s</span> <span class="o">=</span> <span class="n">padding</span><span class="o">.</span><span class="n">size</span>
-    <span class="k">else</span><span class="p">:</span> <span class="n">p_s</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">p_w</span><span class="p">,</span> <span class="n">p_h</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">shape</span>
-
-    <span class="k">assert</span> <span class="n">depth_f</span> <span class="o">==</span> <span class="n">depth_im</span>
-
-    <span class="n">final</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">n_filt</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">im_w</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_s</span> <span class="o">-</span> <span class="n">f_w</span><span class="p">)</span><span class="o">/</span><span class="n">stride</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">im_h</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">p_s</span> <span class="o">-</span> <span class="n">f_h</span><span class="p">)</span><span class="o">/</span><span class="n">stride</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p_w</span><span class="o">-</span><span class="n">f_h</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">stride</span><span class="p">):</span> <span class="c1">#vertical passes</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p_h</span><span class="o">-</span><span class="n">f_w</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">stride</span><span class="p">):</span> <span class="c1">#horizontal passes</span>
-            <span class="n">final</span><span class="p">[:,:,</span><span class="n">j</span><span class="o">//</span><span class="n">stride</span><span class="p">,</span><span class="n">k</span><span class="o">//</span><span class="n">stride</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">weight</span><span class="p">[:,:,</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="n">f_h</span><span class="p">,</span><span class="n">k</span><span class="p">:</span><span class="n">k</span><span class="o">+</span><span class="n">f_w</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">filts</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">filts_bias</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">final</span>
-</pre></div>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
