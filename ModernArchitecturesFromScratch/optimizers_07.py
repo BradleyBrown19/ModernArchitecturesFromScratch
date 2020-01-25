@@ -145,8 +145,7 @@ class AverageGrad(OptimStat):
 
     def update(self, p, state, mom, **kwargs):
         state['damp_mom'] = 1-mom if self.damp else 1.
-        #state["grad_avg"] = state["grad_avg"] * mom + state['damp_mom']*p.grad
-        state['grad_avg'].mul_(mom).add_(state['damp_mom'], p.grad.data)
+        state['grad_avg'] = state['grad_avg']*mom + state["damp_mom"] * p.grad.data
         return state
 
 # Cell
@@ -158,8 +157,7 @@ class AverageSquaredGrad(OptimStat):
 
     def update(self, p, state, sqr_mom, **kwargs):
         state['sqr_damp_mom'] = 1-sqr_mom if self.damp else 1.
-        #state["sqr_grad_avg"] = state["grad_avg"] * sqr_mom + state['sqr_damp_mom']*(p.grad**2)
-        state['sqr_grad_avg'].mul_(sqr_mom).addcmul_(state['sqr_damp_mom'], p.grad.data, p.grad.data)
+        state["sqr_grad_avg"] = state["grad_avg"] * sqr_mom + state['sqr_damp_mom']*(p.grad**2)
         return state
 
 # Cell
@@ -171,7 +169,7 @@ def adam_step(p, lr, mom, damp_mom, steps_taken, sqr_mom, sqr_damp_mom, grad_avg
     "Performs an Adam step of the optimizer"
     debias1 = debias(mom, damp_mom, steps_taken)
     debias2 = debias(sqr_mom, sqr_damp_mom, steps_taken)
-    p.d.addcdiv_(-lr / debias1, grad_avg, (sqr_grad_avg/debias2).sqrt() + eps)
+    p.d += -lr / debias1 * (grad_avg / (sqr_grad_avg/debias2).sqrt() + eps)
     return p
 
 # Cell

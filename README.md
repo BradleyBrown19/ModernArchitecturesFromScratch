@@ -10,7 +10,7 @@
 
 # Modern Architectures from Scratch
 
-> Recreating recent and notable deep learning architectures from scratch using only built in python functionality. No PyTorch or Tensorflow (except for the tensor class from PyTorch). Nothing else was used (not even gradient calculations (AutoGrad) or modules)
+> Recreating recent and notable deep learning architectures from scratch using only built in python functionality. No PyTorch or Tensorflow (except for the tensor class from PyTorch). Nothing else was used (not even gradient calculations or modules)
 
 
 ## How to Use
@@ -25,7 +25,7 @@ from ModernArchitecturesFromScratch.callbacks_05 import *
 from ModernArchitecturesFromScratch.batchnorm_06 import *
 from ModernArchitecturesFromScratch.optimizers_07 import *
 ```
-a full list of functions, classes and features defined in this API can be found here: https://bradleybrown19.github.io/ModernArchitecturesFromScratch/! Please see the tab on the left for a description of each imported module
+a full list of functions, classes and features defined in this API can be found here: https://bradleybrown19.github.io/ModernArchitecturesFromScratch/ Please see the tab on the left for a description of each imported module
 
 Feel free to look at either the exported python files or the notebooks used to develop them!
 

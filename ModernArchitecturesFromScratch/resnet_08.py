@@ -40,7 +40,7 @@ class NestedModel(Module):
 
 # Cell
 class TestMixingGrads(NestedModel):
-    "Test Module so Nested SequentialModels will work"
+    "Test module to see if nested SequentialModels will work"
     def __init__(self):
         super().__init__()
         self.layers = SequentialModel(Linear(784, 50, True), ReLU(), Linear(50,25, False))
@@ -155,6 +155,7 @@ class XResNet():
               for i in range(n_blocks)])
 
 # Cell
+#hide
 class NestedSequentialModel(SequentialModel):
     def __repr__(self): return f'(\n{super().__repr__()}\n)'
 
