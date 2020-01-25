@@ -43,7 +43,7 @@ def test_near(a,b):
 
 # Cell
 def test_near_zero(data, tol=1e-3):
-    "Tests if tensor values are near zero under given 'tol'"
+    "Tests if tensor values are near zero under given `tol`"
     assert data.abs() < tol; print(f'Near zero: {data}')
 
 # Cell
