@@ -27,7 +27,7 @@ summary: "Fully implemented ResNet architecture from scratch: https://arxiv.org/
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Helper">Helper<a class="anchor-link" href="#Helper">&#182;</a></h1>
+<h2 id="Helper">Helper<a class="anchor-link" href="#Helper">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -56,7 +56,7 @@ summary: "Fully implemented ResNet architecture from scratch: https://arxiv.org/
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Nested-Modules">Nested Modules<a class="anchor-link" href="#Nested-Modules">&#182;</a></h1>
+<h2 id="Nested-Modules">Nested Modules<a class="anchor-link" href="#Nested-Modules">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -209,7 +209,7 @@ good
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="ConvLayer">ConvLayer<a class="anchor-link" href="#ConvLayer">&#182;</a></h1>
+<h2 id="ConvLayer">ConvLayer<a class="anchor-link" href="#ConvLayer">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -318,7 +318,7 @@ good
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="ResBlocks">ResBlocks<a class="anchor-link" href="#ResBlocks">&#182;</a></h1>
+<h2 id="ResBlocks">ResBlocks<a class="anchor-link" href="#ResBlocks">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -352,6 +352,47 @@ good
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BaseRes</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
+    <span class="s2">&quot;Resblock Layer: ConvBnActivation layer with a skip connection between inputs and outputs, dynamically changes sizing&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expansion</span><span class="p">,</span> <span class="n">n_in</span><span class="p">,</span> <span class="n">n_h</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span> <span class="o">=</span> <span class="n">n_in</span><span class="o">*</span><span class="n">expansion</span><span class="p">,</span> <span class="n">n_h</span><span class="o">*</span><span class="n">expansion</span>
+
+        <span class="k">if</span> <span class="n">expansion</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_h</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">),</span> <span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_h</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">layers</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_h</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_h</span><span class="p">,</span> <span class="n">n_h</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">),</span>
+            <span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_h</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span> <span class="o">=</span> <span class="n">SequentialModel</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">()</span> <span class="k">if</span> <span class="n">n_in</span> <span class="o">==</span> <span class="n">n_out</span> <span class="k">else</span> <span class="n">SequentialModel</span><span class="p">(</span><span class="n">Pool</span><span class="p">(</span><span class="s1">&#39;Average&#39;</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xb</span><span class="p">):</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_out</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_out</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span>
+
+    <span class="k">def</span> <span class="nf">bwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_out</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_out</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span> <span class="k">yield</span> <span class="n">p</span> 
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{self.conv_layer} || {self.identity}&#39;</span>
+</pre></div>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -406,6 +447,42 @@ good
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">XResNet</span><span class="p">():</span>
+    <span class="s2">&quot;Class to create ResNet architectures of dynamic sizing&quot;</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expansion</span><span class="p">,</span> <span class="n">layers</span><span class="p">,</span> <span class="n">c_in</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c_out</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">]):</span>
+        <span class="n">nfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">c_in</span><span class="p">,</span> <span class="p">(</span><span class="n">c_in</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+        <span class="n">stem</span> <span class="o">=</span> <span class="p">[</span><span class="n">ConvLayer</span><span class="p">(</span><span class="n">nfs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nfs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+
+        <span class="n">nfs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="o">//</span><span class="n">expansion</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">512</span><span class="p">]</span>
+
+        <span class="n">res_layers</span> <span class="o">=</span> <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">_make_layer</span><span class="p">(</span><span class="n">expansion</span><span class="p">,</span> <span class="n">nfs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nfs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                                      <span class="n">n_blocks</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="mi">2</span><span class="p">)</span>
+                  <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layers</span><span class="p">)]</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="n">SequentialModel</span><span class="p">(</span>
+            <span class="n">Reshape</span><span class="p">(</span><span class="n">c_in</span><span class="p">,</span> <span class="o">*</span><span class="n">size</span><span class="p">),</span>
+            <span class="o">*</span><span class="n">stem</span><span class="p">,</span>
+            <span class="n">Pool</span><span class="p">(</span><span class="n">max_pool</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">Padding</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+            <span class="o">*</span><span class="n">res_layers</span><span class="p">,</span>
+            <span class="n">Pool</span><span class="p">(</span><span class="n">avg_pool</span><span class="p">,</span><span class="n">ks</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">Flatten</span><span class="p">(),</span>
+            <span class="n">Linear</span><span class="p">(</span><span class="n">nfs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">expansion</span><span class="p">,</span> <span class="n">c_out</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_make_layer</span><span class="p">(</span><span class="n">expansion</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nf</span><span class="p">,</span> <span class="n">n_blocks</span><span class="p">,</span> <span class="n">stride</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">NestedSequentialModel</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">ResBlock</span><span class="p">(</span><span class="n">expansion</span><span class="p">,</span> <span class="n">ni</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="n">nf</span><span class="p">,</span> <span class="n">nf</span><span class="p">,</span> <span class="n">stride</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_blocks</span><span class="p">)])</span>
+</pre></div>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 

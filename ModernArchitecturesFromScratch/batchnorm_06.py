@@ -106,6 +106,7 @@ class Batchnorm(Module):
 
 # Cell
 def get_conv_model():
+    "Returns a sequential convolutional model"
     return SequentialModel(Reshape(1, 28, 28),
             Conv(1, 8, stride=2),
             Batchnorm(8),
@@ -114,6 +115,7 @@ def get_conv_model():
     )
 
 def get_conv_learner():
+    "Returns a conv learner object"
     m = get_conv_model()
     o = Optimizer
     l = CrossEntropy()
@@ -121,6 +123,7 @@ def get_conv_learner():
     return Learner(m,l,o,db)
 
 def get_conv_runner(callbacks):
+    "Returns a convolutionary model runner, ready to be fitted with given `callbacks`"
     learn = get_conv_learner()
     run = Runner(learn, callbacks)
     return run

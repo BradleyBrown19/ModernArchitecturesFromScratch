@@ -27,7 +27,7 @@ summary: "Implementing an advanced training loop to take advantage of callbacks.
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="DataLoader">DataLoader<a class="anchor-link" href="#DataLoader">&#182;</a></h1>
+<h2 id="DataLoader">DataLoader<a class="anchor-link" href="#DataLoader">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -192,7 +192,7 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Learner">Learner<a class="anchor-link" href="#Learner">&#182;</a></h1>
+<h2 id="Learner">Learner<a class="anchor-link" href="#Learner">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -813,6 +813,27 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">annealer</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="s2">&quot;Allows easy implementation of different scheduling functions through inner functions&quot;</span>
+    <span class="k">def</span> <span class="nf">_inner</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span> <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_inner</span>
+
+<span class="nd">@annealer</span>
+<span class="k">def</span> <span class="nf">linear_scheduler</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span> 
+    <span class="s2">&quot;Schedule linearly from start to end&quot;</span>
+    <span class="k">return</span> <span class="n">pos</span><span class="o">*</span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="n">start</span>
+
+<span class="nd">@annealer</span>
+<span class="k">def</span> <span class="nf">cos_scheduler</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span> 
+    <span class="s2">&quot;Schedule using a cosine function&quot;</span>
+    <span class="k">return</span> <span class="n">start</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pos</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+</pre></div>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 

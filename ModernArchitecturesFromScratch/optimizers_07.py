@@ -69,7 +69,7 @@ def update_default_states(stats, state, init):
 
 # Cell
 class StatedOptimizer():
-    "Optimizer retrofited to have states to be kept track of by the parameters"
+    "Optimizer with ability to keep and update various parameter states"
     def __init__(self, params, step_fcns=[sgd_step], stats=[], **defaults):
         _defaults = {'lr':0.1, 'wd':1e-4, 'mom':0.9, 'sqr_mom': 0.99}
         defaults = update_defaults(_defaults, defaults)
