@@ -70,6 +70,7 @@ class Identity(Module):
 
 # Cell
 class BasicRes(Module):
+    "Basic block to implement the two different ResBlocks presented in the paper"
     def __init__(self, n_in, n_out, expansion=1, stride=1, Activation=ReLU, *args, **kwargs):
         super().__init__()
         self.n_in, self.n_out, self.expansion, self.stride, self.Activation = n_in, n_out, expansion, stride, Activation
@@ -102,7 +103,7 @@ class BasicRes(Module):
 # Cell
 class BasicResBlock(BasicRes):
     expansion=1
-    "Basic ResBlock layer"
+    "Basic ResBlock layer, 2 `ConvBatch` layers with no expansion"
     def __init__(self, n_in, n_out, *args, **kwargs):
         super().__init__(n_in, n_out, *args, **kwargs)
         expansion = 1
@@ -117,7 +118,7 @@ class BasicResBlock(BasicRes):
 # Cell
 class BottleneckBlock(BasicRes):
     expansion=4
-    "Basic ResBlock layer"
+    "Bottleneck layer, 3 `ConvBatch` layers with an expansion factor of 4"
     def __init__(self, n_in, n_out, *args, **kwargs):
         super().__init__(n_in, n_out, *args, **kwargs)
 
@@ -143,7 +144,7 @@ class ResBlock(NestedModel):
 
 # Cell
 class ResLayer(NestedModel):
-    "Sequential res layers"
+    "Sequential ResBlock layers as outlined in the paper"
     def __init__(self, block, n, n_in, n_out, *args, **kwargs):
         layers = []
         self.block, self.n, self.n_in, self.n_out = block, n, n_in, n_out
@@ -156,7 +157,6 @@ class ResLayer(NestedModel):
         self.layers = SequentialModel(*layers)
 
     def __repr__(self): return f'ResLayer(\n{self.layers}\n)'
-    #def __repr__(self): return f'ResLayer(block={self.block.__name__}, num_lay={self.n}, n_in={self.n_in}, n_out={self.n_out}, downsample={})'
 
 # Cell
 class ResNet(NestedModel):
