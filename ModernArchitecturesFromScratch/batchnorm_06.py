@@ -65,6 +65,7 @@ class Batchnorm(Module):
     "Module for applying batch normalization"
     def __init__(self, nf, mom=0.1, eps=1e-6):
         super().__init__()
+        self.nf = nf
         self.mom, self.eps = mom, eps
         self.multiplier = Parameter(torch.ones(1,nf, 1, 1))
         self.adder = Parameter(torch.zeros(1,nf,1,1))
@@ -102,7 +103,7 @@ class Batchnorm(Module):
 
         inp.g = (delta_norm * var_factor) + (delta_mean / bs) + (delta_var * 2 / bs * mean_factor)
 
-    def __repr__(self): return f'Batchnorm'
+    def __repr__(self): return f'Batchnorm({self.nf})'
 
 # Cell
 def get_conv_model():

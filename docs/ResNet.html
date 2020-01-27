@@ -280,31 +280,7 @@ good
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ConvLayer" class="doc_header"><code>class</code> <code>ConvLayer</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L63" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ConvLayer</code>(<strong><code>n_in</code></strong>, <strong><code>n_out</code></strong>, <strong><code>kernel_size</code></strong>=<em><code>3</code></em>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>leak</code></strong>=<em><code>1</code></em>, <strong><code>Activation</code></strong>=<em><code>'ReLU'</code></em>) :: <a href="/ModernArchitecturesFromScratch/ResNet#NestedModel"><code>NestedModel</code></a></p>
-</blockquote>
-<p>NestModel that allows for a sequential model to be called withing an outer model</p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h2 id="Identity" class="doc_header"><code>class</code> <code>Identity</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L74" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Identity</code>() :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
+<h2 id="Identity" class="doc_header"><code>class</code> <code>Identity</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L65" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Identity</code>() :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
 </blockquote>
 <p>Module to perform the identity connection (what goes in, comes out)</p>
 
@@ -341,9 +317,9 @@ good
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="BaseRes" class="doc_header"><code>class</code> <code>BaseRes</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L81" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BaseRes</code>(<strong><code>expansion</code></strong>, <strong><code>n_in</code></strong>, <strong><code>n_h</code></strong>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
+<h2 id="BasicRes" class="doc_header"><code>class</code> <code>BasicRes</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L72" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BasicRes</code>(<strong><code>n_in</code></strong>, <strong><code>n_out</code></strong>, <strong><code>expansion</code></strong>=<em><code>1</code></em>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>Activation</code></strong>=<em><code>'ReLU'</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
 </blockquote>
-<p>Resblock Layer: ConvBnActivation layer with a skip connection between inputs and outputs, dynamically changes sizing</p>
+<p>Defines a base class for all layers of the network. Allows for easy implementation of forward and backward passes as well as updating learnable parameters</p>
 
 </div>
 
@@ -352,47 +328,6 @@ good
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BaseRes</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
-    <span class="s2">&quot;Resblock Layer: ConvBnActivation layer with a skip connection between inputs and outputs, dynamically changes sizing&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expansion</span><span class="p">,</span> <span class="n">n_in</span><span class="p">,</span> <span class="n">n_h</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-
-        <span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span> <span class="o">=</span> <span class="n">n_in</span><span class="o">*</span><span class="n">expansion</span><span class="p">,</span> <span class="n">n_h</span><span class="o">*</span><span class="n">expansion</span>
-
-        <span class="k">if</span> <span class="n">expansion</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_h</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">),</span> <span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_h</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">)]</span>
-        <span class="k">else</span><span class="p">:</span> <span class="n">layers</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_h</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-            <span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_h</span><span class="p">,</span> <span class="n">n_h</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="n">stride</span><span class="p">),</span>
-            <span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_h</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="p">]</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span> <span class="o">=</span> <span class="n">SequentialModel</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">identity</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">()</span> <span class="k">if</span> <span class="n">n_in</span> <span class="o">==</span> <span class="n">n_out</span> <span class="k">else</span> <span class="n">SequentialModel</span><span class="p">(</span><span class="n">Pool</span><span class="p">(</span><span class="s1">&#39;Average&#39;</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">ConvLayer</span><span class="p">(</span><span class="n">n_in</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xb</span><span class="p">):</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">id_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_out</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_out</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span>
-
-    <span class="k">def</span> <span class="nf">bwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv_out</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">id_out</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span> <span class="k">yield</span> <span class="n">p</span> 
-
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{self.conv_layer} || {self.identity}&#39;</span>
-</pre></div>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -406,9 +341,81 @@ good
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ResBlock" class="doc_header"><code>class</code> <code>ResBlock</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L117" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ResBlock</code>(<strong><code>expansion</code></strong>, <strong><code>n_in</code></strong>, <strong><code>n_h</code></strong>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>kernel_size</code></strong>=<em><code>3</code></em>, <strong><code>Activation</code></strong>=<em><code>'ReLU'</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ResNet#NestedModel"><code>NestedModel</code></a></p>
+<h2 id="BasicResBlock" class="doc_header"><code>class</code> <code>BasicResBlock</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L103" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BasicResBlock</code>(<strong><code>n_in</code></strong>, <strong><code>n_out</code></strong>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ResNet#BasicRes"><code>BasicRes</code></a></p>
+</blockquote>
+<p>Defines a base class for all layers of the network. Allows for easy implementation of forward and backward passes as well as updating learnable parameters</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="BottleneckBlock" class="doc_header"><code>class</code> <code>BottleneckBlock</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L118" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>BottleneckBlock</code>(<strong><code>n_in</code></strong>, <strong><code>n_out</code></strong>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ResNet#BasicRes"><code>BasicRes</code></a></p>
+</blockquote>
+<p>Defines a base class for all layers of the network. Allows for easy implementation of forward and backward passes as well as updating learnable parameters</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ResBlock" class="doc_header"><code>class</code> <code>ResBlock</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L133" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ResBlock</code>(<strong><code>n_in</code></strong>, <strong><code>n_out</code></strong>, <strong><code>block</code></strong>=<em><code>'BasicResBlock'</code></em>, <strong><code>stride</code></strong>=<em><code>1</code></em>, <strong><code>kernel_size</code></strong>=<em><code>3</code></em>, <strong><code>Activation</code></strong>=<em><code>'ReLU'</code></em>, <strong>**<code>kwargs</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ResNet#NestedModel"><code>NestedModel</code></a></p>
 </blockquote>
 <p>Adds the final activation after the skip connection addition</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="ResLayer" class="doc_header"><code>class</code> <code>ResLayer</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L145" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ResLayer</code>(<strong><code>block</code></strong>, <strong><code>n</code></strong>, <strong><code>n_in</code></strong>, <strong><code>n_out</code></strong>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ResNet#NestedModel"><code>NestedModel</code></a></p>
+</blockquote>
+<p>Sequential res layers</p>
 
 </div>
 
@@ -436,7 +443,7 @@ good
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ResNet" class="doc_header"><code>class</code> <code>ResNet</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L127" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ResNet</code>()</p>
+<h2 id="ResNet" class="doc_header"><code>class</code> <code>ResNet</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L162" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ResNet</code>(<strong><code>block</code></strong>, <strong><code>layer_sizes</code></strong>=<em><code>[64, 128, 256, 512]</code></em>, <strong><code>depths</code></strong>=<em><code>[2, 2, 2, 2]</code></em>, <strong><code>c_in</code></strong>=<em><code>3</code></em>, <strong><code>c_out</code></strong>=<em><code>1000</code></em>, <strong><code>im_size</code></strong>=<em><code>(28, 28)</code></em>, <strong><code>activation</code></strong>=<em><code>'ReLU'</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ResNet#NestedModel"><code>NestedModel</code></a></p>
 </blockquote>
 <p>Class to create ResNet architectures of dynamic sizing</p>
 
@@ -448,41 +455,58 @@ good
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ResNet</span><span class="p">():</span>
-    <span class="s2">&quot;Class to create ResNet architectures of dynamic sizing&quot;</span>
-    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expansion</span><span class="p">,</span> <span class="n">layers</span><span class="p">,</span> <span class="n">c_in</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c_out</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">]):</span>
-        <span class="n">nfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">c_in</span><span class="p">,</span> <span class="p">(</span><span class="n">c_in</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
-        <span class="n">stem</span> <span class="o">=</span> <span class="p">[</span><span class="n">ConvLayer</span><span class="p">(</span><span class="n">nfs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nfs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-        <span class="n">nfs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="o">//</span><span class="n">expansion</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">512</span><span class="p">]</span>
-
-        <span class="n">res_layers</span> <span class="o">=</span> <span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">_make_layer</span><span class="p">(</span><span class="n">expansion</span><span class="p">,</span> <span class="n">nfs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nfs</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
-                                      <span class="n">n_blocks</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="mi">2</span><span class="p">)</span>
-                  <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">layers</span><span class="p">)]</span>
-
-        <span class="n">res</span> <span class="o">=</span> <span class="n">SequentialModel</span><span class="p">(</span>
-            <span class="n">Reshape</span><span class="p">(</span><span class="n">c_in</span><span class="p">,</span> <span class="o">*</span><span class="n">size</span><span class="p">),</span>
-            <span class="o">*</span><span class="n">stem</span><span class="p">,</span>
-            <span class="n">Pool</span><span class="p">(</span><span class="n">max_pool</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">Padding</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
-            <span class="o">*</span><span class="n">res_layers</span><span class="p">,</span>
-            <span class="n">Pool</span><span class="p">(</span><span class="n">avg_pool</span><span class="p">,</span><span class="n">ks</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">Flatten</span><span class="p">(),</span>
-            <span class="n">Linear</span><span class="p">(</span><span class="n">nfs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">expansion</span><span class="p">,</span> <span class="n">c_out</span><span class="p">,</span> <span class="bp">False</span><span class="p">),</span>
-        <span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">res</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_make_layer</span><span class="p">(</span><span class="n">expansion</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">nf</span><span class="p">,</span> <span class="n">n_blocks</span><span class="p">,</span> <span class="n">stride</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">NestedSequentialModel</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">ResBlock</span><span class="p">(</span><span class="n">expansion</span><span class="p">,</span> <span class="n">ni</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="n">nf</span><span class="p">,</span> <span class="n">nf</span><span class="p">,</span> <span class="n">stride</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
-              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_blocks</span><span class="p">)])</span>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">ResNet</span><span class="p">(</span><span class="n">BasicResBlock</span><span class="p">)</span>
+<span class="n">res</span>
 </pre></div>
 
+    </div>
 </div>
 </div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>ResNet: 
+(Layer1): Reshape(3, 28, 28)
+(Layer2): Conv(3, 64, ks = 7, stride = 2), Batchnorm
+(Layer3): ReLU()
+(Layer4): MaxPool(ks: 3, stride: 2)
+(Layer5): ResLayer(
+(Layer1): ResBlock(64, 64, kernel_size=3, stride=1)
+(Layer2): ResBlock(64, 64, kernel_size=3, stride=1)
+)
+(Layer6): ResLayer(
+(Layer1): ResBlock(64, 128, kernel_size=3, stride=2)
+(Layer2): ResBlock(128, 128, kernel_size=3, stride=1)
+)
+(Layer7): ResLayer(
+(Layer1): ResBlock(128, 256, kernel_size=3, stride=2)
+(Layer2): ResBlock(256, 256, kernel_size=3, stride=1)
+)
+(Layer8): ResLayer(
+(Layer1): ResBlock(256, 512, kernel_size=3, stride=2)
+(Layer2): ResBlock(512, 512, kernel_size=3, stride=1)
+)
+(Layer9): AveragePool(ks: 1, stride: 1)
+(Layer10): Flatten()
+(Layer11): Linear(512, 1000)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 
@@ -496,31 +520,7 @@ good
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="NestedSequentialModel" class="doc_header"><code>class</code> <code>NestedSequentialModel</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L159" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>NestedSequentialModel</code>(<strong>*<code>args</code></strong>) :: <a href="/ModernArchitecturesFromScratch/ModelTraining#SequentialModel"><code>SequentialModel</code></a></p>
-</blockquote>
-<p>Model for executing forward and backward passes on a given list of <code>layers</code></p>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="GetResnet" class="doc_header"><code>GetResnet</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L163" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>GetResnet</code>(<strong><code>size</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="GetResnet" class="doc_header"><code>GetResnet</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/resnet_08.py#L198" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>GetResnet</code>(<strong><code>size</code></strong>, <strong><code>c_in</code></strong>=<em><code>3</code></em>, <strong><code>c_out</code></strong>=<em><code>10</code></em>, <strong>*<code>args</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Helper function to get ResNet architectures of different sizes</p>
 
@@ -559,30 +559,30 @@ good
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(Layer1): Reshape(1, 28, 28)
-(Layer2): ConvBnActivation(1, 16)
-(Layer3): ConvBnActivation(16, 64)
-(Layer4): ConvBnActivation(64, 64)
-(Layer5): MaxPool(ks: 3, stride: 2)
-(Layer6): (
-(Layer1): ResBlock(64, 64)
-(Layer2): ResBlock(64, 64)
+<pre>ResNet: 
+(Layer1): Reshape(1, 28, 28)
+(Layer2): Conv(1, 64, ks = 7, stride = 2), Batchnorm
+(Layer3): ReLU()
+(Layer4): MaxPool(ks: 3, stride: 2)
+(Layer5): ResLayer(
+(Layer1): ResBlock(64, 64, kernel_size=3, stride=1)
+(Layer2): ResBlock(64, 64, kernel_size=3, stride=1)
 )
-(Layer7): (
-(Layer1): ResBlock(64, 128)
-(Layer2): ResBlock(128, 128)
+(Layer6): ResLayer(
+(Layer1): ResBlock(64, 128, kernel_size=3, stride=2)
+(Layer2): ResBlock(128, 128, kernel_size=3, stride=1)
 )
-(Layer8): (
-(Layer1): ResBlock(128, 256)
-(Layer2): ResBlock(256, 256)
+(Layer7): ResLayer(
+(Layer1): ResBlock(128, 256, kernel_size=3, stride=2)
+(Layer2): ResBlock(256, 256, kernel_size=3, stride=1)
 )
-(Layer9): (
-(Layer1): ResBlock(256, 512)
-(Layer2): ResBlock(512, 512)
+(Layer8): ResLayer(
+(Layer1): ResBlock(256, 512, kernel_size=3, stride=2)
+(Layer2): ResBlock(512, 512, kernel_size=3, stride=1)
 )
-(Layer10): AveragePool(ks: 1, stride: 2)
-(Layer11): Flatten()
-(Layer12): Linear(512, 10)</pre>
+(Layer9): AveragePool(ks: 1, stride: 1)
+(Layer10): Flatten()
+(Layer11): Linear(512, 10)</pre>
 </div>
 
 </div>
@@ -611,38 +611,38 @@ good
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(Layer1): Reshape(1, 28, 28)
-(Layer2): ConvBnActivation(1, 16)
-(Layer3): ConvBnActivation(16, 64)
-(Layer4): ConvBnActivation(64, 64)
-(Layer5): MaxPool(ks: 3, stride: 2)
-(Layer6): (
-(Layer1): ResBlock(64, 64)
-(Layer2): ResBlock(64, 64)
-(Layer3): ResBlock(64, 64)
+<pre>ResNet: 
+(Layer1): Reshape(1, 28, 28)
+(Layer2): Conv(1, 64, ks = 7, stride = 2), Batchnorm
+(Layer3): ReLU()
+(Layer4): MaxPool(ks: 3, stride: 2)
+(Layer5): ResLayer(
+(Layer1): ResBlock(64, 64, kernel_size=3, stride=1)
+(Layer2): ResBlock(64, 64, kernel_size=3, stride=1)
+(Layer3): ResBlock(64, 64, kernel_size=3, stride=1)
 )
-(Layer7): (
-(Layer1): ResBlock(64, 128)
-(Layer2): ResBlock(128, 128)
-(Layer3): ResBlock(128, 128)
-(Layer4): ResBlock(128, 128)
+(Layer6): ResLayer(
+(Layer1): ResBlock(64, 128, kernel_size=3, stride=2)
+(Layer2): ResBlock(128, 128, kernel_size=3, stride=1)
+(Layer3): ResBlock(128, 128, kernel_size=3, stride=1)
+(Layer4): ResBlock(128, 128, kernel_size=3, stride=1)
 )
-(Layer8): (
-(Layer1): ResBlock(128, 256)
-(Layer2): ResBlock(256, 256)
-(Layer3): ResBlock(256, 256)
-(Layer4): ResBlock(256, 256)
-(Layer5): ResBlock(256, 256)
-(Layer6): ResBlock(256, 256)
+(Layer7): ResLayer(
+(Layer1): ResBlock(128, 256, kernel_size=3, stride=2)
+(Layer2): ResBlock(256, 256, kernel_size=3, stride=1)
+(Layer3): ResBlock(256, 256, kernel_size=3, stride=1)
+(Layer4): ResBlock(256, 256, kernel_size=3, stride=1)
+(Layer5): ResBlock(256, 256, kernel_size=3, stride=1)
+(Layer6): ResBlock(256, 256, kernel_size=3, stride=1)
 )
-(Layer9): (
-(Layer1): ResBlock(256, 512)
-(Layer2): ResBlock(512, 512)
-(Layer3): ResBlock(512, 512)
+(Layer8): ResLayer(
+(Layer1): ResBlock(256, 512, kernel_size=3, stride=2)
+(Layer2): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer3): ResBlock(512, 512, kernel_size=3, stride=1)
 )
-(Layer10): AveragePool(ks: 1, stride: 2)
-(Layer11): Flatten()
-(Layer12): Linear(512, 10)</pre>
+(Layer9): AveragePool(ks: 1, stride: 1)
+(Layer10): Flatten()
+(Layer11): Linear(512, 10)</pre>
 </div>
 
 </div>
@@ -671,38 +671,38 @@ good
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(Layer1): Reshape(1, 28, 28)
-(Layer2): ConvBnActivation(1, 16)
-(Layer3): ConvBnActivation(16, 64)
-(Layer4): ConvBnActivation(64, 64)
-(Layer5): MaxPool(ks: 3, stride: 2)
-(Layer6): (
-(Layer1): ResBlock(16, 256)
-(Layer2): ResBlock(64, 256)
-(Layer3): ResBlock(64, 256)
+<pre>ResNet: 
+(Layer1): Reshape(1, 28, 28)
+(Layer2): Conv(1, 64, ks = 7, stride = 2), Batchnorm
+(Layer3): ReLU()
+(Layer4): MaxPool(ks: 3, stride: 2)
+(Layer5): ResLayer(
+(Layer1): ResBlock(64, 256, kernel_size=3, stride=1)
+(Layer2): ResBlock(256, 256, kernel_size=3, stride=1)
+(Layer3): ResBlock(256, 256, kernel_size=3, stride=1)
 )
-(Layer7): (
-(Layer1): ResBlock(64, 512)
-(Layer2): ResBlock(128, 512)
-(Layer3): ResBlock(128, 512)
-(Layer4): ResBlock(128, 512)
+(Layer6): ResLayer(
+(Layer1): ResBlock(256, 512, kernel_size=3, stride=2)
+(Layer2): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer3): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer4): ResBlock(512, 512, kernel_size=3, stride=1)
 )
-(Layer8): (
-(Layer1): ResBlock(128, 1024)
-(Layer2): ResBlock(256, 1024)
-(Layer3): ResBlock(256, 1024)
-(Layer4): ResBlock(256, 1024)
-(Layer5): ResBlock(256, 1024)
-(Layer6): ResBlock(256, 1024)
+(Layer7): ResLayer(
+(Layer1): ResBlock(512, 1024, kernel_size=3, stride=2)
+(Layer2): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer3): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer4): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer5): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer6): ResBlock(1024, 1024, kernel_size=3, stride=1)
 )
-(Layer9): (
-(Layer1): ResBlock(256, 2048)
-(Layer2): ResBlock(512, 2048)
-(Layer3): ResBlock(512, 2048)
+(Layer8): ResLayer(
+(Layer1): ResBlock(1024, 2048, kernel_size=3, stride=2)
+(Layer2): ResBlock(2048, 2048, kernel_size=3, stride=1)
+(Layer3): ResBlock(2048, 2048, kernel_size=3, stride=1)
 )
-(Layer10): AveragePool(ks: 1, stride: 2)
-(Layer11): Flatten()
-(Layer12): Linear(2048, 10)</pre>
+(Layer9): AveragePool(ks: 1, stride: 1)
+(Layer10): Flatten()
+(Layer11): Linear(2048, 10)</pre>
 </div>
 
 </div>
@@ -731,55 +731,55 @@ good
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(Layer1): Reshape(1, 28, 28)
-(Layer2): ConvBnActivation(1, 16)
-(Layer3): ConvBnActivation(16, 64)
-(Layer4): ConvBnActivation(64, 64)
-(Layer5): MaxPool(ks: 3, stride: 2)
-(Layer6): (
-(Layer1): ResBlock(16, 256)
-(Layer2): ResBlock(64, 256)
-(Layer3): ResBlock(64, 256)
+<pre>ResNet: 
+(Layer1): Reshape(1, 28, 28)
+(Layer2): Conv(1, 64, ks = 7, stride = 2), Batchnorm
+(Layer3): ReLU()
+(Layer4): MaxPool(ks: 3, stride: 2)
+(Layer5): ResLayer(
+(Layer1): ResBlock(64, 256, kernel_size=3, stride=1)
+(Layer2): ResBlock(256, 256, kernel_size=3, stride=1)
+(Layer3): ResBlock(256, 256, kernel_size=3, stride=1)
 )
-(Layer7): (
-(Layer1): ResBlock(64, 512)
-(Layer2): ResBlock(128, 512)
-(Layer3): ResBlock(128, 512)
-(Layer4): ResBlock(128, 512)
+(Layer6): ResLayer(
+(Layer1): ResBlock(256, 512, kernel_size=3, stride=2)
+(Layer2): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer3): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer4): ResBlock(512, 512, kernel_size=3, stride=1)
 )
-(Layer8): (
-(Layer1): ResBlock(128, 1024)
-(Layer2): ResBlock(256, 1024)
-(Layer3): ResBlock(256, 1024)
-(Layer4): ResBlock(256, 1024)
-(Layer5): ResBlock(256, 1024)
-(Layer6): ResBlock(256, 1024)
-(Layer7): ResBlock(256, 1024)
-(Layer8): ResBlock(256, 1024)
-(Layer9): ResBlock(256, 1024)
-(Layer10): ResBlock(256, 1024)
-(Layer11): ResBlock(256, 1024)
-(Layer12): ResBlock(256, 1024)
-(Layer13): ResBlock(256, 1024)
-(Layer14): ResBlock(256, 1024)
-(Layer15): ResBlock(256, 1024)
-(Layer16): ResBlock(256, 1024)
-(Layer17): ResBlock(256, 1024)
-(Layer18): ResBlock(256, 1024)
-(Layer19): ResBlock(256, 1024)
-(Layer20): ResBlock(256, 1024)
-(Layer21): ResBlock(256, 1024)
-(Layer22): ResBlock(256, 1024)
-(Layer23): ResBlock(256, 1024)
+(Layer7): ResLayer(
+(Layer1): ResBlock(512, 1024, kernel_size=3, stride=2)
+(Layer2): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer3): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer4): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer5): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer6): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer7): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer8): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer9): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer10): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer11): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer12): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer13): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer14): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer15): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer16): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer17): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer18): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer19): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer20): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer21): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer22): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer23): ResBlock(1024, 1024, kernel_size=3, stride=1)
 )
-(Layer9): (
-(Layer1): ResBlock(256, 2048)
-(Layer2): ResBlock(512, 2048)
-(Layer3): ResBlock(512, 2048)
+(Layer8): ResLayer(
+(Layer1): ResBlock(1024, 2048, kernel_size=3, stride=2)
+(Layer2): ResBlock(2048, 2048, kernel_size=3, stride=1)
+(Layer3): ResBlock(2048, 2048, kernel_size=3, stride=1)
 )
-(Layer10): AveragePool(ks: 1, stride: 2)
-(Layer11): Flatten()
-(Layer12): Linear(2048, 10)</pre>
+(Layer9): AveragePool(ks: 1, stride: 1)
+(Layer10): Flatten()
+(Layer11): Linear(2048, 10)</pre>
 </div>
 
 </div>
@@ -808,72 +808,72 @@ good
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>(Layer1): Reshape(1, 28, 28)
-(Layer2): ConvBnActivation(1, 16)
-(Layer3): ConvBnActivation(16, 64)
-(Layer4): ConvBnActivation(64, 64)
-(Layer5): MaxPool(ks: 3, stride: 2)
-(Layer6): (
-(Layer1): ResBlock(16, 256)
-(Layer2): ResBlock(64, 256)
-(Layer3): ResBlock(64, 256)
+<pre>ResNet: 
+(Layer1): Reshape(1, 28, 28)
+(Layer2): Conv(1, 64, ks = 7, stride = 2), Batchnorm
+(Layer3): ReLU()
+(Layer4): MaxPool(ks: 3, stride: 2)
+(Layer5): ResLayer(
+(Layer1): ResBlock(64, 256, kernel_size=3, stride=1)
+(Layer2): ResBlock(256, 256, kernel_size=3, stride=1)
+(Layer3): ResBlock(256, 256, kernel_size=3, stride=1)
 )
-(Layer7): (
-(Layer1): ResBlock(64, 512)
-(Layer2): ResBlock(128, 512)
-(Layer3): ResBlock(128, 512)
-(Layer4): ResBlock(128, 512)
-(Layer5): ResBlock(128, 512)
-(Layer6): ResBlock(128, 512)
-(Layer7): ResBlock(128, 512)
-(Layer8): ResBlock(128, 512)
+(Layer6): ResLayer(
+(Layer1): ResBlock(256, 512, kernel_size=3, stride=2)
+(Layer2): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer3): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer4): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer5): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer6): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer7): ResBlock(512, 512, kernel_size=3, stride=1)
+(Layer8): ResBlock(512, 512, kernel_size=3, stride=1)
 )
-(Layer8): (
-(Layer1): ResBlock(128, 1024)
-(Layer2): ResBlock(256, 1024)
-(Layer3): ResBlock(256, 1024)
-(Layer4): ResBlock(256, 1024)
-(Layer5): ResBlock(256, 1024)
-(Layer6): ResBlock(256, 1024)
-(Layer7): ResBlock(256, 1024)
-(Layer8): ResBlock(256, 1024)
-(Layer9): ResBlock(256, 1024)
-(Layer10): ResBlock(256, 1024)
-(Layer11): ResBlock(256, 1024)
-(Layer12): ResBlock(256, 1024)
-(Layer13): ResBlock(256, 1024)
-(Layer14): ResBlock(256, 1024)
-(Layer15): ResBlock(256, 1024)
-(Layer16): ResBlock(256, 1024)
-(Layer17): ResBlock(256, 1024)
-(Layer18): ResBlock(256, 1024)
-(Layer19): ResBlock(256, 1024)
-(Layer20): ResBlock(256, 1024)
-(Layer21): ResBlock(256, 1024)
-(Layer22): ResBlock(256, 1024)
-(Layer23): ResBlock(256, 1024)
-(Layer24): ResBlock(256, 1024)
-(Layer25): ResBlock(256, 1024)
-(Layer26): ResBlock(256, 1024)
-(Layer27): ResBlock(256, 1024)
-(Layer28): ResBlock(256, 1024)
-(Layer29): ResBlock(256, 1024)
-(Layer30): ResBlock(256, 1024)
-(Layer31): ResBlock(256, 1024)
-(Layer32): ResBlock(256, 1024)
-(Layer33): ResBlock(256, 1024)
-(Layer34): ResBlock(256, 1024)
-(Layer35): ResBlock(256, 1024)
-(Layer36): ResBlock(256, 1024)
+(Layer7): ResLayer(
+(Layer1): ResBlock(512, 1024, kernel_size=3, stride=2)
+(Layer2): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer3): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer4): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer5): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer6): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer7): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer8): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer9): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer10): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer11): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer12): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer13): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer14): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer15): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer16): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer17): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer18): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer19): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer20): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer21): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer22): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer23): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer24): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer25): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer26): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer27): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer28): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer29): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer30): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer31): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer32): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer33): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer34): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer35): ResBlock(1024, 1024, kernel_size=3, stride=1)
+(Layer36): ResBlock(1024, 1024, kernel_size=3, stride=1)
 )
-(Layer9): (
-(Layer1): ResBlock(256, 2048)
-(Layer2): ResBlock(512, 2048)
-(Layer3): ResBlock(512, 2048)
+(Layer8): ResLayer(
+(Layer1): ResBlock(1024, 2048, kernel_size=3, stride=2)
+(Layer2): ResBlock(2048, 2048, kernel_size=3, stride=1)
+(Layer3): ResBlock(2048, 2048, kernel_size=3, stride=1)
 )
-(Layer10): AveragePool(ks: 1, stride: 2)
-(Layer11): Flatten()
-(Layer12): Linear(2048, 10)</pre>
+(Layer9): AveragePool(ks: 1, stride: 1)
+(Layer10): Flatten()
+(Layer11): Linear(2048, 10)</pre>
 </div>
 
 </div>
@@ -888,19 +888,6 @@ good
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="n">get_runner</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">GetResnet</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="n">c_in</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c_out</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 
     </div>
