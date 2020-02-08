@@ -1,5 +1,5 @@
 {
-  "Notebook": {
+  "From Scratch": {
     "Basic Operations": "basic_operations",
     "Fully Connected Network": "FullyConnectedNetwork",
     "Model Training": "ModelTraining",
@@ -8,5 +8,14 @@
     "Batchnorm": "Batchnorm",
     "Advanced Optimizers": "Optimizers",
     "ResNet": "ResNet"
+  },
+  "From Pytorch": {
+    "ScratchToPytorch": "ScratchToPytorch",
+    "XResNet": "XResNet",
+    "SSD": "SingleShotDetector",
+    "BERT": "BERT",
+    "LSTM": "LSTM",
+    "GRU": "GRU",
+    "CycleGAN": "cycleGAN"
   }
 }

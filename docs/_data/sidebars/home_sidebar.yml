@@ -31,6 +31,30 @@ entries:
       title: ResNet
       url: ResNet
     output: web
-    title: Notebook
+    title: From Scratch
+  - folderitems:
+    - output: web,pdf
+      title: ScratchToPytorch
+      url: ScratchToPytorch
+    - output: web,pdf
+      title: XResNet
+      url: XResNet
+    - output: web,pdf
+      title: SSD
+      url: SingleShotDetector
+    - output: web,pdf
+      title: BERT
+      url: BERT
+    - output: web,pdf
+      title: LSTM
+      url: LSTM
+    - output: web,pdf
+      title: GRU
+      url: GRU
+    - output: web,pdf
+      title: CycleGAN
+      url: cycleGAN
+    output: web
+    title: From Pytorch
   output: web
   title: Sidebar
