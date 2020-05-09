@@ -8,9 +8,9 @@
 
 -->
 
-# Modern Architectures from Scratch
+# Modern Architectures from Scratch - Deep Learning Library
 
-> Recreating recent and notable deep learning architectures from scratch using only built in python functionality. No PyTorch or Tensorflow (except for the tensor class from PyTorch). Nothing else was used (not even gradient calculations or modules)
+> Recreating recent and notable deep learning architectures from scratch using only built in python functionality. No PyTorch or Tensorflow (except for the tensor class from PyTorch). Nothing else was used (not even gradient calculations or modules). End result is a library built from scratch capable of training state of the art deep learning networks in 5 lines of code.
 
 
 ## How to Use
