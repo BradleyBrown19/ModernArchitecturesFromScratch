@@ -115,6 +115,13 @@ class CrossSoft(Module):
 class Model():
     def __init__(self, layers):
         self.layers = layers
+        self.learner = None
+        for lay in self.layers:
+            lay.learner = None
+
+    def set_learner(self, learner):
+        for lay in self.layers:
+            lay.learner = learner
 
     def __call__(self, x):
         for l in self.layers: x = l(x)

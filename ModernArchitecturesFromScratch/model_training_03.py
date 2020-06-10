@@ -83,6 +83,12 @@ class SequentialModel():
     def __init__(self, *args):
         self.layers = list(args)
         self.training = True
+        self.learner = None
+
+    def set_learner(self, learner):
+        self.learner = learner
+        for lay in self.layers:
+            lay.learner = learner
 
     def __repr__(self):
         "Prints out all modules of model"

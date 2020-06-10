@@ -332,6 +332,7 @@ class Learner():
     def __init__(self, model, loss_func, optimizer, db, lr=0.5):
         "Wrapper for model, loss function, optimizer and databunch"
         self.model, self.loss_func, self.optimizer, self.db = model, loss_func, optimizer(model.parameters(), lr=lr), db
+        self.model.set_learner(self)
 
     def __repr__(self): return f'Data: \n {self.db} \n Model: \n {self.model}'
 
@@ -433,5 +434,5 @@ class ProgressCallback(Callback):
     def before_valid(self): self.set_pb(self.databunch.valid)
 
     def set_pb(self, dl):
-        self.pb = progress_bar(dl, parent=self.mbar, auto_update=False)
+        self.pb = progress_bar(dl, parent=self.mbar)
         self.mbar.update(self.epoch)

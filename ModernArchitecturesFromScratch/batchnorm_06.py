@@ -82,6 +82,9 @@ class Batchnorm(Module):
 
 
     def forward(self, xb):
+        if not self.learner.model.training:
+            normed = (xb-self.mean) / (self.vars+self.eps).sqrt()
+            return normed * self.multiplier.d + self.adder.d
         mean, var = self.update(xb)
         self.after_stats = (xb - mean) / (var + self.eps).sqrt()
         self.after_scaling = self.after_stats * self.multiplier.d + self.adder.d
