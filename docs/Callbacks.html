@@ -6,6 +6,7 @@ keywords: fastai
 sidebar: home_sidebar
 
 summary: "Implementing an advanced training loop to take advantage of callbacks. Defines new wrapper classes such as databunch and learner."
+description: "Implementing an advanced training loop to take advantage of callbacks. Defines new wrapper classes such as databunch and learner."
 ---
 <!--
 
@@ -18,22 +19,36 @@ summary: "Implementing an advanced training loop to take advantage of callbacks.
 -->
 
 <div class="container" id="notebook-container">
+        
+    {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="DataLoader">DataLoader<a class="anchor-link" href="#DataLoader">&#182;</a></h2>
+<h2 id="DataLoader">DataLoader<a class="anchor-link" href="#DataLoader"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -43,7 +58,7 @@ summary: "Implementing an advanced training loop to take advantage of callbacks.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L183" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
+<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L189" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
 </blockquote>
 <p>Container class to store and get input and target values from a dataset</p>
 
@@ -55,6 +70,10 @@ summary: "Implementing an advanced training loop to take advantage of callbacks.
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -64,7 +83,7 @@ summary: "Implementing an advanced training loop to take advantage of callbacks.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DataLoader" class="doc_header"><code>class</code> <code>DataLoader</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L208" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataLoader</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
+<h2 id="DataLoader" class="doc_header"><code>class</code> <code>DataLoader</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L214" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataLoader</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
 </blockquote>
 <p>Refactored DataLoader to include a batcher, also collates the output of batcher into single tensor for model</p>
 
@@ -76,9 +95,17 @@ summary: "Implementing an advanced training loop to take advantage of callbacks.
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -100,9 +127,17 @@ summary: "Implementing an advanced training loop to take advantage of callbacks.
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -124,6 +159,10 @@ summary: "Implementing an advanced training loop to take advantage of callbacks.
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -145,6 +184,10 @@ summary: "Implementing an advanced training loop to take advantage of callbacks.
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -158,6 +201,10 @@ summary: "Implementing an advanced training loop to take advantage of callbacks.
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -190,15 +237,23 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Learner">Learner<a class="anchor-link" href="#Learner">&#182;</a></h2>
+<h2 id="Learner">Learner<a class="anchor-link" href="#Learner"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -219,9 +274,17 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -243,12 +306,17 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span> <span class="o">=</span> <span class="n">Learner</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">Optimizer</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="p">[</span><span class="n">Linear</span><span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="n">ReLU</span><span class="p">(),</span> <span class="n">Linear</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">False</span><span class="p">)])</span>
+<span class="n">learn</span> <span class="o">=</span> <span class="n">Learner</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">Optimizer</span><span class="p">,</span> <span class="n">db</span><span class="p">)</span>
 <span class="n">learn</span>
 </pre></div>
 
@@ -261,10 +329,11 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 
 <div class="output_area">
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Data: 
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt; &lt;ipython-input-19-51751b17fe8e&gt;(7)__init__()
+-&gt; model.set_learner(self)
+(Pdb) self
+Data: 
  Databunch(
 Train: Data: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 64, 
 ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
@@ -272,24 +341,106 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
  Model: 
  (Layer1): Linear(784, 50)
 (Layer2): ReLU()
-(Layer3): Linear(50, 10)</pre>
+(Layer3): Linear(50, 10)
+(Pdb) model.set_learner(self)
+(Pdb) model.learner
+(Pdb) model.learner = 2
+(Pdb) model.layers[0].learner
+Data: 
+ Databunch(
+Train: Data: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 64, 
+ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
+) 
+ Model: 
+ (Layer1): Linear(784, 50)
+(Layer2): ReLU()
+(Layer3): Linear(50, 10)
+(Pdb) exit
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">BdbQuit</span>                                   Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-22-3d0b2ce1be4a&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> model<span class="ansi-blue-fg">,</span>_<span class="ansi-blue-fg">,</span>_ <span class="ansi-blue-fg">=</span> get_model<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0.1</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">[</span>Linear<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">784</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">50</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> ReLU<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> Linear<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">50</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>learn <span class="ansi-blue-fg">=</span> Learner<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0.1</span><span class="ansi-blue-fg">,</span> Optimizer<span class="ansi-blue-fg">,</span> db<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> learn
+
+<span class="ansi-green-fg">&lt;ipython-input-19-51751b17fe8e&gt;</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, model, loss_func, optimizer, db, lr)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span>         self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>loss_func<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>optimizer<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>db <span class="ansi-blue-fg">=</span> model<span class="ansi-blue-fg">,</span> loss_func<span class="ansi-blue-fg">,</span> optimizer<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">.</span>parameters<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> lr<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> db
+<span class="ansi-green-intense-fg ansi-bold">      6</span>         <span class="ansi-green-fg">import</span> pdb<span class="ansi-blue-fg">;</span> pdb<span class="ansi-blue-fg">.</span>set_trace<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 7</span><span class="ansi-red-fg">         </span>model<span class="ansi-blue-fg">.</span>set_learner<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      8</span> 
+<span class="ansi-green-intense-fg ansi-bold">      9</span>     <span class="ansi-green-fg">def</span> __repr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">f&#39;Data: \n {self.db} \n Model: \n {self.model}&#39;</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-19-51751b17fe8e&gt;</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, model, loss_func, optimizer, db, lr)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span>         self<span class="ansi-blue-fg">.</span>model<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>loss_func<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>optimizer<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>db <span class="ansi-blue-fg">=</span> model<span class="ansi-blue-fg">,</span> loss_func<span class="ansi-blue-fg">,</span> optimizer<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">.</span>parameters<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> lr<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> db
+<span class="ansi-green-intense-fg ansi-bold">      6</span>         <span class="ansi-green-fg">import</span> pdb<span class="ansi-blue-fg">;</span> pdb<span class="ansi-blue-fg">.</span>set_trace<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 7</span><span class="ansi-red-fg">         </span>model<span class="ansi-blue-fg">.</span>set_learner<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      8</span> 
+<span class="ansi-green-intense-fg ansi-bold">      9</span>     <span class="ansi-green-fg">def</span> __repr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-blue-fg">f&#39;Data: \n {self.db} \n Model: \n {self.model}&#39;</span>
+
+<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/bdb.py</span> in <span class="ansi-cyan-fg">trace_dispatch</span><span class="ansi-blue-fg">(self, frame, event, arg)</span>
+<span class="ansi-green-intense-fg ansi-bold">     86</span>             <span class="ansi-green-fg">return</span> <span class="ansi-red-fg"># None</span>
+<span class="ansi-green-intense-fg ansi-bold">     87</span>         <span class="ansi-green-fg">if</span> event <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#39;line&#39;</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 88</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>dispatch_line<span class="ansi-blue-fg">(</span>frame<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     89</span>         <span class="ansi-green-fg">if</span> event <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#39;call&#39;</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     90</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>dispatch_call<span class="ansi-blue-fg">(</span>frame<span class="ansi-blue-fg">,</span> arg<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/bdb.py</span> in <span class="ansi-cyan-fg">dispatch_line</span><span class="ansi-blue-fg">(self, frame)</span>
+<span class="ansi-green-intense-fg ansi-bold">    111</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>stop_here<span class="ansi-blue-fg">(</span>frame<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">or</span> self<span class="ansi-blue-fg">.</span>break_here<span class="ansi-blue-fg">(</span>frame<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    112</span>             self<span class="ansi-blue-fg">.</span>user_line<span class="ansi-blue-fg">(</span>frame<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 113</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>quitting<span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">raise</span> BdbQuit
+<span class="ansi-green-intense-fg ansi-bold">    114</span>         <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>trace_dispatch
+<span class="ansi-green-intense-fg ansi-bold">    115</span> 
+
+<span class="ansi-red-fg">BdbQuit</span>: </pre>
+</div>
 </div>
 
 </div>
-
-</div>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">learner</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Runner">Runner<a class="anchor-link" href="#Runner">&#182;</a></h1>
+<h1 id="Runner">Runner<a class="anchor-link" href="#Runner"> </a></h1>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -311,6 +462,8 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">do_one_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="n">yb</span><span class="p">):</span>
@@ -343,7 +496,7 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_callbacks</span><span class="p">(</span><span class="s1">&#39;after_batch&#39;</span><span class="p">):</span> <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">iters</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
         <span class="s2">&quot;Method to fit the model `epoch` times using learning rate `lr`&quot;</span>
@@ -362,17 +515,23 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
     <span class="k">def</span> <span class="nf">check_callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
         <span class="s2">&quot;Helper functions to run through each callback, calling it&#39;s state method if applicable&quot;</span>
         <span class="k">for</span> <span class="n">cb</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cbs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">_order</span><span class="p">):</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">f</span> <span class="ow">and</span> <span class="n">f</span><span class="p">():</span> <span class="k">return</span> <span class="bp">True</span>
-        <span class="k">return</span> <span class="bp">False</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cb</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">f</span> <span class="ow">and</span> <span class="n">f</span><span class="p">():</span> <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -393,6 +552,10 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -414,6 +577,10 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -435,6 +602,10 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -456,6 +627,10 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -477,6 +652,10 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -498,21 +677,29 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Callbacks">Callbacks<a class="anchor-link" href="#Callbacks">&#182;</a></h1>
+<h1 id="Callbacks">Callbacks<a class="anchor-link" href="#Callbacks"> </a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Base-Class">Base Class<a class="anchor-link" href="#Base-Class">&#182;</a></h2>
+<h2 id="Base-Class">Base Class<a class="anchor-link" href="#Base-Class"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -534,15 +721,23 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Built-in-Callback">Built in Callback<a class="anchor-link" href="#Built-in-Callback">&#182;</a></h2>
+<h2 id="Built-in-Callback">Built in Callback<a class="anchor-link" href="#Built-in-Callback"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -564,15 +759,23 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Metric-Tracking">Metric Tracking<a class="anchor-link" href="#Metric-Tracking">&#182;</a></h2>
+<h2 id="Metric-Tracking">Metric Tracking<a class="anchor-link" href="#Metric-Tracking"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -594,6 +797,10 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -615,6 +822,10 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -636,6 +847,8 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Testing the <a href="/ModernArchitecturesFromScratch/Callbacks#Stats"><code>Stats</code></a> callback:</p>
@@ -643,6 +856,8 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -656,6 +871,10 @@ ValidData: X: torch.Size([50000, 784]), Y: torch.Size([50000]), bs = 128
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -697,15 +916,23 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Parameter-Scheduling">Parameter Scheduling<a class="anchor-link" href="#Parameter-Scheduling">&#182;</a></h2>
+<h2 id="Parameter-Scheduling">Parameter Scheduling<a class="anchor-link" href="#Parameter-Scheduling"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -715,7 +942,7 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Optimizer" class="doc_header"><code>class</code> <code>Optimizer</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L165" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Optimizer</code>(<strong><code>params</code></strong>, <strong><code>lr</code></strong>)</p>
+<h2 id="Optimizer" class="doc_header"><code>class</code> <code>Optimizer</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L171" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Optimizer</code>(<strong><code>params</code></strong>, <strong><code>lr</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -726,9 +953,17 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -750,9 +985,17 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -774,6 +1017,10 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -794,6 +1041,10 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -814,6 +1065,8 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">annealer</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
@@ -835,9 +1088,15 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -859,9 +1118,17 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -883,9 +1150,17 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -906,6 +1181,8 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Testing <a href="/ModernArchitecturesFromScratch/Callbacks#HyperRecorder"><code>HyperRecorder</code></a> and <a href="/ModernArchitecturesFromScratch/Callbacks#Scheduler"><code>Scheduler</code></a></p>
@@ -913,6 +1190,8 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -929,6 +1208,10 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -942,6 +1225,10 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -955,6 +1242,10 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -968,6 +1259,10 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -999,6 +1294,10 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1030,21 +1329,29 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Progress-Bar">Progress Bar<a class="anchor-link" href="#Progress-Bar">&#182;</a></h1>
+<h1 id="Progress-Bar">Progress Bar<a class="anchor-link" href="#Progress-Bar"> </a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Reformated-Stats">Reformated Stats<a class="anchor-link" href="#Reformated-Stats">&#182;</a></h2>
+<h2 id="Reformated-Stats">Reformated Stats<a class="anchor-link" href="#Reformated-Stats"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -1066,9 +1373,17 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -1078,7 +1393,7 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="loss" class="doc_header"><code>loss</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/callbacks_05.py#L345" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>loss</code>(<strong><code>preds</code></strong>, <strong><code>targ</code></strong>, <strong><code>loss</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="loss" class="doc_header"><code>loss</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/callbacks_05.py#L346" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>loss</code>(<strong><code>preds</code></strong>, <strong><code>targ</code></strong>, <strong><code>loss</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Stat for loss</p>
 
@@ -1090,9 +1405,17 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -1114,6 +1437,10 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -1135,6 +1462,10 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -1156,9 +1487,17 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -1168,7 +1507,7 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="ProgressCallback" class="doc_header"><code>class</code> <code>ProgressCallback</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/callbacks_05.py#L422" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ProgressCallback</code>() :: <a href="/ModernArchitecturesFromScratch/Callbacks#Callback"><code>Callback</code></a></p>
+<h2 id="ProgressCallback" class="doc_header"><code>class</code> <code>ProgressCallback</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/callbacks_05.py#L423" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>ProgressCallback</code>() :: <a href="/ModernArchitecturesFromScratch/Callbacks#Callback"><code>Callback</code></a></p>
 </blockquote>
 <p>Callback to make a nice progress bar with metrics for training. Slightly modified version of: <a href="https://github.com/fastai/course-v3/blob/master/nbs/dl2/09c_add_progress_bar.ipynb">https://github.com/fastai/course-v3/blob/master/nbs/dl2/09c_add_progress_bar.ipynb</a></p>
 
@@ -1180,6 +1519,8 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Testing out the progress bar:</p>
@@ -1187,6 +1528,8 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1200,6 +1543,10 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1265,6 +1612,8 @@ Valid: Loss: 0.0008652143878862262, Accuracy: 0.94514000415802
 </div>
 
 </div>
+    {% endraw %}
+
 </div>
  
 

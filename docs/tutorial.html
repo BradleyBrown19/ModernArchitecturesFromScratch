@@ -6,6 +6,7 @@ keywords: fastai
 sidebar: home_sidebar
 
 summary: "A step by step guide"
+description: "A step by step guide"
 ---
 <!--
 
@@ -18,10 +19,14 @@ summary: "A step by step guide"
 -->
 
 <div class="container" id="notebook-container">
+        
+    {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>nbdev is a system for <em>exploratory programming</em>. See the <a href="https://www.fast.ai/2019/12/02/nbdev/">nbdev launch post</a> for information about what that means. In practice, programming in this way can feel very different to the kind of programming many of you will be familiar with, since we've mainly be taught coding techniques that are (at least implicitly) tied to the underlying tools we have access to. I've found that programming in a "notebook first" way can make me 2-3x more productive than I was before (when we used vscode, Visual Studio, vim, PyCharm, and similar tools).</p>
@@ -38,13 +43,13 @@ summary: "A step by step guide"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Set-up-Repo">Set up Repo<a class="anchor-link" href="#Set-up-Repo">&#182;</a></h2>
+<h2 id="Set-up-Repo">Set up Repo<a class="anchor-link" href="#Set-up-Repo"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Template">Template<a class="anchor-link" href="#Template">&#182;</a></h3>
+<h3 id="Template">Template<a class="anchor-link" href="#Template"> </a></h3>
 </div>
 </div>
 </div>
@@ -59,7 +64,7 @@ summary: "A step by step guide"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Github-pages">Github pages<a class="anchor-link" href="#Github-pages">&#182;</a></h3>
+<h3 id="Github-pages">Github pages<a class="anchor-link" href="#Github-pages"> </a></h3>
 </div>
 </div>
 </div>
@@ -73,7 +78,7 @@ summary: "A step by step guide"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Edit-settings.init">Edit settings.init<a class="anchor-link" href="#Edit-settings.init">&#182;</a></h2>
+<h2 id="Edit-settings.init">Edit settings.init<a class="anchor-link" href="#Edit-settings.init"> </a></h2>
 </div>
 </div>
 </div>
@@ -102,7 +107,7 @@ summary: "A step by step guide"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install-git-hooks">Install git hooks<a class="anchor-link" href="#Install-git-hooks">&#182;</a></h2>
+<h2 id="Install-git-hooks">Install git hooks<a class="anchor-link" href="#Install-git-hooks"> </a></h2>
 </div>
 </div>
 </div>
@@ -116,7 +121,7 @@ summary: "A step by step guide"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Edit-00_core.ipynb">Edit 00_core.ipynb<a class="anchor-link" href="#Edit-00_core.ipynb">&#182;</a></h2>
+<h2 id="Edit-00_core.ipynb">Edit 00_core.ipynb<a class="anchor-link" href="#Edit-00_core.ipynb"> </a></h2>
 </div>
 </div>
 </div>
@@ -138,7 +143,7 @@ summary: "A step by step guide"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Add-cell-comments">Add cell comments<a class="anchor-link" href="#Add-cell-comments">&#182;</a></h3>
+<h3 id="Add-cell-comments">Add cell comments<a class="anchor-link" href="#Add-cell-comments"> </a></h3>
 </div>
 </div>
 </div>
@@ -152,7 +157,7 @@ summary: "A step by step guide"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Add-a-function">Add a function<a class="anchor-link" href="#Add-a-function">&#182;</a></h3>
+<h3 id="Add-a-function">Add a function<a class="anchor-link" href="#Add-a-function"> </a></h3>
 </div>
 </div>
 </div>
@@ -162,16 +167,22 @@ summary: "A step by step guide"
 <div class="highlight"><pre><span></span><span class="c1">#export</span>
 <span class="k">def</span> <span class="nf">say_hello</span><span class="p">(</span><span class="n">to</span><span class="p">):</span>
     <span class="s2">&quot;Say hello to somebody&quot;</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Hello {to}!&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello </span><span class="si">{to}</span><span class="s1">!&#39;</span><span class="p">)</span>
 </pre></div>
 <p>Notice how it includes <code>#export</code> at the top - this means it will be included in our module, and documentation. The documentation will look like this:</p>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -193,9 +204,11 @@ summary: "A step by step guide"
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Add-examples-and-tests">Add examples and tests<a class="anchor-link" href="#Add-examples-and-tests">&#182;</a></h3>
+<h3 id="Add-examples-and-tests">Add examples and tests<a class="anchor-link" href="#Add-examples-and-tests"> </a></h3>
 </div>
 </div>
 </div>
@@ -206,6 +219,8 @@ summary: "A step by step guide"
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -235,6 +250,8 @@ summary: "A step by step guide"
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Examples can output plots, images, etc, and they'll all appear in your docs, e.g.:</p>
@@ -242,12 +259,14 @@ summary: "A step by step guide"
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span><span class="n">SVG</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span><span class="n">SVG</span>
 <span class="n">display</span><span class="p">(</span><span class="n">SVG</span><span class="p">(</span><span class="s1">&#39;&lt;svg height=&quot;100&quot;&gt;&lt;circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot;/&gt;&lt;/svg&gt;&#39;</span><span class="p">))</span>
 </pre></div>
 
@@ -271,6 +290,8 @@ summary: "A step by step guide"
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can also include tests:</p>
@@ -278,6 +299,8 @@ summary: "A step by step guide"
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -291,6 +314,8 @@ summary: "A step by step guide"
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You should also add markdown headings as you create your notebook; one benefit of this is that a table of contents will be created in the documentation automatically.</p>
@@ -300,7 +325,7 @@ summary: "A step by step guide"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Build-lib">Build lib<a class="anchor-link" href="#Build-lib">&#182;</a></h2>
+<h2 id="Build-lib">Build lib<a class="anchor-link" href="#Build-lib"> </a></h2>
 </div>
 </div>
 </div>
@@ -317,7 +342,7 @@ Converted index.ipynb.</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Edit-index.ipynb">Edit index.ipynb<a class="anchor-link" href="#Edit-index.ipynb">&#182;</a></h2>
+<h2 id="Edit-index.ipynb">Edit index.ipynb<a class="anchor-link" href="#Edit-index.ipynb"> </a></h2>
 </div>
 </div>
 </div>
@@ -331,7 +356,7 @@ Converted index.ipynb.</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Build-docs">Build docs<a class="anchor-link" href="#Build-docs">&#182;</a></h2>
+<h2 id="Build-docs">Build docs<a class="anchor-link" href="#Build-docs"> </a></h2>
 </div>
 </div>
 </div>
@@ -348,7 +373,7 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Commit-to-Github">Commit to Github<a class="anchor-link" href="#Commit-to-Github">&#182;</a></h2>
+<h2 id="Commit-to-Github">Commit to Github<a class="anchor-link" href="#Commit-to-Github"> </a></h2>
 </div>
 </div>
 </div>
@@ -361,7 +386,7 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="CI">CI<a class="anchor-link" href="#CI">&#182;</a></h3>
+<h3 id="CI">CI<a class="anchor-link" href="#CI"> </a></h3>
 </div>
 </div>
 </div>
@@ -382,7 +407,7 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="View-docs-and-readme">View docs and readme<a class="anchor-link" href="#View-docs-and-readme">&#182;</a></h3>
+<h3 id="View-docs-and-readme">View docs and readme<a class="anchor-link" href="#View-docs-and-readme"> </a></h3>
 </div>
 </div>
 </div>
@@ -397,7 +422,7 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Add-a-class">Add a class<a class="anchor-link" href="#Add-a-class">&#182;</a></h2>
+<h2 id="Add-a-class">Add a class<a class="anchor-link" href="#Add-a-class"> </a></h2>
 </div>
 </div>
 </div>
@@ -414,9 +439,15 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -438,9 +469,11 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Document-with-show_doc">Document with show_doc<a class="anchor-link" href="#Document-with-show_doc">&#182;</a></h3>
+<h3 id="Document-with-show_doc">Document with show_doc<a class="anchor-link" href="#Document-with-show_doc"> </a></h3>
 </div>
 </div>
 </div>
@@ -454,6 +487,8 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -475,6 +510,8 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And add some examples and/or tests:</p>
@@ -482,6 +519,8 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -496,9 +535,11 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Add-links-with-backticks">Add links with backticks<a class="anchor-link" href="#Add-links-with-backticks">&#182;</a></h2>
+<h2 id="Add-links-with-backticks">Add links with backticks<a class="anchor-link" href="#Add-links-with-backticks"> </a></h2>
 </div>
 </div>
 </div>
@@ -516,7 +557,7 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Set-up-autoreload">Set up autoreload<a class="anchor-link" href="#Set-up-autoreload">&#182;</a></h2>
+<h2 id="Set-up-autoreload">Set up autoreload<a class="anchor-link" href="#Set-up-autoreload"> </a></h2>
 </div>
 </div>
 </div>
@@ -532,7 +573,7 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Add-in-notebook-export-cell">Add in-notebook export cell<a class="anchor-link" href="#Add-in-notebook-export-cell">&#182;</a></h2>
+<h2 id="Add-in-notebook-export-cell">Add in-notebook export cell<a class="anchor-link" href="#Add-in-notebook-export-cell"> </a></h2>
 </div>
 </div>
 </div>
@@ -548,7 +589,7 @@ converting: /home/jhoward/git/nbdev/nbs/index.ipynb</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Run-tests-in-parallel">Run tests in parallel<a class="anchor-link" href="#Run-tests-in-parallel">&#182;</a></h2>
+<h2 id="Run-tests-in-parallel">Run tests in parallel<a class="anchor-link" href="#Run-tests-in-parallel"> </a></h2>
 </div>
 </div>
 </div>
@@ -566,7 +607,7 @@ All tests are passing!</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="View-docs-locally">View docs locally<a class="anchor-link" href="#View-docs-locally">&#182;</a></h2>
+<h2 id="View-docs-locally">View docs locally<a class="anchor-link" href="#View-docs-locally"> </a></h2>
 </div>
 </div>
 </div>
@@ -580,7 +621,7 @@ All tests are passing!</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Set-up-prerequisites">Set up prerequisites<a class="anchor-link" href="#Set-up-prerequisites">&#182;</a></h2>
+<h2 id="Set-up-prerequisites">Set up prerequisites<a class="anchor-link" href="#Set-up-prerequisites"> </a></h2>
 </div>
 </div>
 </div>
@@ -593,7 +634,7 @@ All tests are passing!</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Set-up-console-scripts">Set up console scripts<a class="anchor-link" href="#Set-up-console-scripts">&#182;</a></h2>
+<h2 id="Set-up-console-scripts">Set up console scripts<a class="anchor-link" href="#Set-up-console-scripts"> </a></h2>
 </div>
 </div>
 </div>
@@ -608,7 +649,7 @@ All tests are passing!</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Test-with-editable-install">Test with editable install<a class="anchor-link" href="#Test-with-editable-install">&#182;</a></h2>
+<h2 id="Test-with-editable-install">Test with editable install<a class="anchor-link" href="#Test-with-editable-install"> </a></h2>
 </div>
 </div>
 </div>
@@ -626,7 +667,7 @@ All tests are passing!</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Upload-to-pypi">Upload to pypi<a class="anchor-link" href="#Upload-to-pypi">&#182;</a></h2>
+<h2 id="Upload-to-pypi">Upload to pypi<a class="anchor-link" href="#Upload-to-pypi"> </a></h2>
 </div>
 </div>
 </div>
@@ -645,7 +686,7 @@ password = your_pypi_password</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Install-collapsible-headings-and-toc2">Install collapsible headings and toc2<a class="anchor-link" href="#Install-collapsible-headings-and-toc2">&#182;</a></h2>
+<h2 id="Install-collapsible-headings-and-toc2">Install collapsible headings and toc2<a class="anchor-link" href="#Install-collapsible-headings-and-toc2"> </a></h2>
 </div>
 </div>
 </div>
@@ -662,7 +703,7 @@ password = your_pypi_password</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Look-at-nbdev-&quot;source&quot;-for-more-ideas">Look at nbdev "source" for more ideas<a class="anchor-link" href="#Look-at-nbdev-&quot;source&quot;-for-more-ideas">&#182;</a></h2>
+<h2 id="Look-at-nbdev-&quot;source&quot;-for-more-ideas">Look at nbdev "source" for more ideas<a class="anchor-link" href="#Look-at-nbdev-&quot;source&quot;-for-more-ideas"> </a></h2>
 </div>
 </div>
 </div>

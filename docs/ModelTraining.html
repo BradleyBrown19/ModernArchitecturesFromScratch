@@ -6,6 +6,7 @@ keywords: fastai
 sidebar: home_sidebar
 
 summary: "Improved and refactored FCN modules as well as Parameters, Optimizers and a Training Loop"
+description: "Improved and refactored FCN modules as well as Parameters, Optimizers and a Training Loop"
 ---
 <!--
 
@@ -18,22 +19,36 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 -->
 
 <div class="container" id="notebook-container">
+        
+    {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Better-Cross-Entropy">Better Cross Entropy<a class="anchor-link" href="#Better-Cross-Entropy">&#182;</a></h2>
+<h2 id="Better-Cross-Entropy">Better Cross Entropy<a class="anchor-link" href="#Better-Cross-Entropy"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -55,6 +70,10 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -76,11 +95,13 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logsumexp</span><span class="p">(</span><span class="n">inp</span><span class="p">):</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="p">((</span><span class="n">inp</span><span class="o">-</span><span class="n">a</span><span class="p">[:,</span><span class="bp">None</span><span class="p">])</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">log</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="p">((</span><span class="n">inp</span><span class="o">-</span><span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">])</span><span class="o">.</span><span class="n">exp</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">log</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">log_softmax_improved</span><span class="p">(</span><span class="n">inp</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">inp</span> <span class="o">-</span> <span class="n">logsumexp</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -89,9 +110,15 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -113,9 +140,17 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -137,15 +172,23 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Initial-Train-Loop">Initial Train Loop<a class="anchor-link" href="#Initial-Train-Loop">&#182;</a></h2>
+<h2 id="Initial-Train-Loop">Initial Train Loop<a class="anchor-link" href="#Initial-Train-Loop"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -167,9 +210,17 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -179,7 +230,7 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fit" class="doc_header"><code>fit</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L216" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fit</code>(<strong><code>epochs</code></strong>, <strong><code>model</code></strong>, <strong><code>optim</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>train</code></strong>, <strong><code>valid</code></strong>)</p>
+<h4 id="fit" class="doc_header"><code>fit</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L222" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fit</code>(<strong><code>epochs</code></strong>, <strong><code>model</code></strong>, <strong><code>optim</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>train</code></strong>, <strong><code>valid</code></strong>)</p>
 </blockquote>
 <p>Fit function 4: Added validation loops, model training status as well as printing of some metrics</p>
 
@@ -191,6 +242,8 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">loss_func</span><span class="p">,</span> <span class="n">train</span><span class="p">,</span> <span class="n">valid</span><span class="p">):</span>
@@ -212,7 +265,7 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
                         <span class="n">l</span><span class="o">.</span><span class="n">b</span>   <span class="o">-=</span> <span class="n">l</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">g</span>   <span class="o">*</span> <span class="n">lr</span>
                         <span class="n">l</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="mi">0</span>
                         <span class="n">l</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Epoch {epoch+1}, Accuracy: {accuracy(model(xt), yt)}&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch {epoch+1}, Accuracy: {accuracy(model(xt), yt)}&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -220,13 +273,19 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Parameters">Parameters<a class="anchor-link" href="#Parameters">&#182;</a></h2>
+<h2 id="Parameters">Parameters<a class="anchor-link" href="#Parameters"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -248,6 +307,10 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -264,6 +327,10 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -293,6 +360,10 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -322,15 +393,23 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Sequential-Model">Sequential Model<a class="anchor-link" href="#Sequential-Model">&#182;</a></h2>
+<h2 id="Sequential-Model">Sequential Model<a class="anchor-link" href="#Sequential-Model"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -352,13 +431,15 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SequentialModel</span><span class="p">():</span>
     <span class="s2">&quot;Model for executing forward and backward passes on a given list of `layers`&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">training</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">training</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="s2">&quot;Prints out all modules of model&quot;</span>
@@ -385,13 +466,19 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="FCN-Layers-Redo">FCN Layers Redo<a class="anchor-link" href="#FCN-Layers-Redo">&#182;</a></h2>
+<h2 id="FCN-Layers-Redo">FCN Layers Redo<a class="anchor-link" href="#FCN-Layers-Redo"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -413,9 +500,17 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -425,7 +520,7 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="CrossEntropy" class="doc_header"><code>class</code> <code>CrossEntropy</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L130" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CrossEntropy</code>() :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
+<h2 id="CrossEntropy" class="doc_header"><code>class</code> <code>CrossEntropy</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L136" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>CrossEntropy</code>() :: <a href="/ModernArchitecturesFromScratch/ModelTraining#Module"><code>Module</code></a></p>
 </blockquote>
 <p>Defines a base class for all layers of the network. Allows for easy implementation of forward and backward passes as well as updating learnable parameters</p>
 
@@ -437,6 +532,8 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CrossEntropy</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
@@ -452,9 +549,15 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -476,30 +579,38 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Linear</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_d</span><span class="p">,</span> <span class="n">out_d</span><span class="p">,</span> <span class="n">relu_after</span><span class="p">,</span> <span class="n">req_grad</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span> 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_d</span><span class="p">,</span> <span class="n">out_d</span><span class="p">,</span> <span class="n">relu_after</span><span class="p">,</span> <span class="n">req_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span> 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">get_weight</span><span class="p">(</span><span class="n">in_d</span><span class="p">,</span> <span class="n">out_d</span><span class="p">,</span> <span class="n">relu_after</span><span class="p">),</span> <span class="n">req_grad</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">out_d</span><span class="p">),</span> <span class="n">req_grad</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xb</span><span class="p">):</span> <span class="k">return</span> <span class="n">xb</span> <span class="err">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">d</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">d</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xb</span><span class="p">):</span> <span class="k">return</span> <span class="n">xb</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">d</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">d</span>
 
     <span class="k">def</span> <span class="nf">bwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
-        <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span> <span class="err">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">t</span><span class="p">()</span> <span class="err">@</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+        <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="n">t</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">t</span><span class="p">()</span> <span class="o">@</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;Linear({self.w.d.shape[0]}, {self.w.d.shape[1]})&#39;</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Linear(</span><span class="si">{self.w.d.shape[0]}</span><span class="s1">, </span><span class="si">{self.w.d.shape[1]}</span><span class="s1">)&#39;</span>
 </pre></div>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -521,18 +632,22 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ReLU</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">clamp_min_</span><span class="p">(</span><span class="mf">0.</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span>
     <span class="k">def</span> <span class="nf">bwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
         <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">inp</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="o">*</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span>
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;ReLU()&#39;</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;ReLU()&#39;</span>
 </pre></div>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -546,6 +661,10 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -577,6 +696,10 @@ summary: "Improved and refactored FCN modules as well as Parameters, Optimizers 
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -607,15 +730,23 @@ Parameter: torch.Size([10]), Requires grad: True
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Optimizer">Optimizer<a class="anchor-link" href="#Optimizer">&#182;</a></h2>
+<h2 id="Optimizer">Optimizer<a class="anchor-link" href="#Optimizer"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -625,7 +756,7 @@ Parameter: torch.Size([10]), Requires grad: True
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Optimizer" class="doc_header"><code>class</code> <code>Optimizer</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L165" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Optimizer</code>(<strong><code>params</code></strong>, <strong><code>lr</code></strong>)</p>
+<h2 id="Optimizer" class="doc_header"><code>class</code> <code>Optimizer</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L171" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Optimizer</code>(<strong><code>params</code></strong>, <strong><code>lr</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -636,6 +767,10 @@ Parameter: torch.Size([10]), Requires grad: True
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -649,6 +784,10 @@ Parameter: torch.Size([10]), Requires grad: True
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -670,7 +809,7 @@ Parameter: torch.Size([10]), Requires grad: True
             <span class="n">optim</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
             <span class="n">optim</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
             
-        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Epoch {epoch+1}, Accuracy: {accuracy(model(xt), yt)}&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch {epoch+1}, Accuracy: {accuracy(model(xt), yt)}&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -678,6 +817,10 @@ Parameter: torch.Size([10]), Requires grad: True
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -707,9 +850,17 @@ Epoch 3, Accuracy: 0.9330599904060364
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -719,7 +870,7 @@ Epoch 3, Accuracy: 0.9330599904060364
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_model" class="doc_header"><code>get_model</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L175" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_model</code>(<strong><code>lr</code></strong>)</p>
+<h4 id="get_model" class="doc_header"><code>get_model</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L181" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_model</code>(<strong><code>lr</code></strong>)</p>
 </blockquote>
 <p>Easy helper function to get basic fully connected network with optimizer and loss function, takes learning rate, <code>lr</code>, as a parameter</p>
 
@@ -731,15 +882,23 @@ Epoch 3, Accuracy: 0.9330599904060364
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Databunch">Databunch<a class="anchor-link" href="#Databunch">&#182;</a></h2>
+<h2 id="Databunch">Databunch<a class="anchor-link" href="#Databunch"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -749,7 +908,7 @@ Epoch 3, Accuracy: 0.9330599904060364
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L183" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
+<h2 id="Dataset" class="doc_header"><code>class</code> <code>Dataset</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L189" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Dataset</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
 </blockquote>
 <p>Container class to store and get input and target values from a dataset</p>
 
@@ -761,6 +920,10 @@ Epoch 3, Accuracy: 0.9330599904060364
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -768,10 +931,10 @@ Epoch 3, Accuracy: 0.9330599904060364
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">DataLoader</span><span class="p">():</span>
     <span class="s2">&quot;Container class to iterate over a dataset given a batcht size&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">bs</span><span class="p">):</span> 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ds</span><span class="p">,</span> <span class="n">bs</span><span class="p">):</span> 
         <span class="s2">&quot;Provide a dataset, `ds`, and batchsize, `bs`&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span> <span class="o">=</span> <span class="n">ds</span><span class="p">,</span><span class="n">bs</span>
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">):</span> <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">bs</span><span class="p">]</span>
 </pre></div>
 
@@ -780,6 +943,10 @@ Epoch 3, Accuracy: 0.9330599904060364
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -794,6 +961,10 @@ Epoch 3, Accuracy: 0.9330599904060364
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -810,7 +981,7 @@ Epoch 3, Accuracy: 0.9330599904060364
             <span class="n">optim</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
             <span class="n">optim</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
             
-        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Epoch {epoch+1}, Accuracy: {accuracy(model(xt), yt)}&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Epoch {epoch+1}, Accuracy: {accuracy(model(xt), yt)}&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -818,6 +989,10 @@ Epoch 3, Accuracy: 0.9330599904060364
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -848,15 +1023,23 @@ Epoch 3, Accuracy: 0.9474200010299683
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Random-Data">Random Data<a class="anchor-link" href="#Random-Data">&#182;</a></h2>
+<h2 id="Random-Data">Random Data<a class="anchor-link" href="#Random-Data"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -866,7 +1049,7 @@ Epoch 3, Accuracy: 0.9474200010299683
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Batcher" class="doc_header"><code>class</code> <code>Batcher</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L192" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Batcher</code>(<strong><code>ds</code></strong>, <strong><code>bs</code></strong>, <strong><code>random</code></strong>)</p>
+<h2 id="Batcher" class="doc_header"><code>class</code> <code>Batcher</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L198" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Batcher</code>(<strong><code>ds</code></strong>, <strong><code>bs</code></strong>, <strong><code>random</code></strong>)</p>
 </blockquote>
 <p>Wrapper for databunch class that randomizes each batch of output if <code>random</code> arg is set to trueu</p>
 
@@ -878,6 +1061,10 @@ Epoch 3, Accuracy: 0.9474200010299683
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -891,6 +1078,10 @@ Epoch 3, Accuracy: 0.9474200010299683
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -905,6 +1096,10 @@ Epoch 3, Accuracy: 0.9474200010299683
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -934,6 +1129,10 @@ Epoch 3, Accuracy: 0.9474200010299683
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -963,9 +1162,17 @@ Epoch 3, Accuracy: 0.9474200010299683
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -975,7 +1182,7 @@ Epoch 3, Accuracy: 0.9474200010299683
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="collate" class="doc_header"><code>collate</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L202" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>collate</code>(<strong><code>b</code></strong>)</p>
+<h4 id="collate" class="doc_header"><code>collate</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L208" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>collate</code>(<strong><code>b</code></strong>)</p>
 </blockquote>
 <p>Combines the input lists <code>b</code> into single inpuut and target tensors</p>
 
@@ -987,6 +1194,10 @@ Epoch 3, Accuracy: 0.9474200010299683
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -996,7 +1207,7 @@ Epoch 3, Accuracy: 0.9474200010299683
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="DataLoader" class="doc_header"><code>class</code> <code>DataLoader</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L208" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataLoader</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
+<h2 id="DataLoader" class="doc_header"><code>class</code> <code>DataLoader</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L214" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>DataLoader</code>(<strong><code>ds</code></strong>, <strong><code>batcher</code></strong>, <strong><code>collate_fcn</code></strong>)</p>
 </blockquote>
 <p>Refactored DataLoader to include a batcher, also collates the output of batcher into single tensor for model</p>
 
@@ -1008,15 +1219,23 @@ Epoch 3, Accuracy: 0.9474200010299683
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Validation">Validation<a class="anchor-link" href="#Validation">&#182;</a></h2>
+<h2 id="Validation">Validation<a class="anchor-link" href="#Validation"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -1026,7 +1245,7 @@ Epoch 3, Accuracy: 0.9474200010299683
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fit" class="doc_header"><code>fit</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L216" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fit</code>(<strong><code>epochs</code></strong>, <strong><code>model</code></strong>, <strong><code>optim</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>train</code></strong>, <strong><code>valid</code></strong>)</p>
+<h4 id="fit" class="doc_header"><code>fit</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L222" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fit</code>(<strong><code>epochs</code></strong>, <strong><code>model</code></strong>, <strong><code>optim</code></strong>, <strong><code>loss_func</code></strong>, <strong><code>train</code></strong>, <strong><code>valid</code></strong>)</p>
 </blockquote>
 <p>Fit function 4: Added validation loops, model training status as well as printing of some metrics</p>
 
@@ -1038,9 +1257,17 @@ Epoch 3, Accuracy: 0.9474200010299683
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -1050,7 +1277,7 @@ Epoch 3, Accuracy: 0.9474200010299683
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_datasets" class="doc_header"><code>get_datasets</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L242" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_datasets</code>()</p>
+<h4 id="get_datasets" class="doc_header"><code>get_datasets</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/model_training_03.py#L248" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_datasets</code>()</p>
 </blockquote>
 <p>Helper function to return proper dataloaders</p>
 
@@ -1062,6 +1289,10 @@ Epoch 3, Accuracy: 0.9474200010299683
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1093,6 +1324,8 @@ Epoch 3, Accuracy: 0.9668591022491455, Loss: 0.11605237424373627
 </div>
 
 </div>
+    {% endraw %}
+
 </div>
  
 

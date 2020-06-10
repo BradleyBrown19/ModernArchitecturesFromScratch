@@ -6,6 +6,7 @@ keywords: fastai
 sidebar: home_sidebar
 
 summary: "Implementing batchnorm regularization"
+description: "Implementing batchnorm regularization"
 ---
 <!--
 
@@ -18,22 +19,36 @@ summary: "Implementing batchnorm regularization"
 -->
 
 <div class="container" id="notebook-container">
+        
+    {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Gradient-Helper-Callback">Gradient Helper Callback<a class="anchor-link" href="#Gradient-Helper-Callback">&#182;</a></h1>
+<h1 id="Gradient-Helper-Callback">Gradient Helper Callback<a class="anchor-link" href="#Gradient-Helper-Callback"> </a></h1>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -55,6 +70,8 @@ summary: "Implementing batchnorm regularization"
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Testing CheckGrad on linear model</p>
@@ -62,6 +79,8 @@ summary: "Implementing batchnorm regularization"
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -75,6 +94,10 @@ summary: "Implementing batchnorm regularization"
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -106,6 +129,10 @@ summary: "Implementing batchnorm regularization"
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -136,15 +163,23 @@ good
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Batchnorm">Batchnorm<a class="anchor-link" href="#Batchnorm">&#182;</a></h1>
+<h1 id="Batchnorm">Batchnorm<a class="anchor-link" href="#Batchnorm"> </a></h1>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -166,12 +201,16 @@ good
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Batchnorm</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><span class="c1">#export</span>
+<span class="k">class</span> <span class="nc">Batchnorm</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
     <span class="s2">&quot;Module for applying batch normalization&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nf</span><span class="p">,</span> <span class="n">mom</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nf</span> <span class="o">=</span> <span class="n">nf</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mom</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span> <span class="o">=</span> <span class="n">mom</span><span class="p">,</span> <span class="n">eps</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nf</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">adder</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nf</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
@@ -180,14 +219,17 @@ good
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xb</span><span class="p">):</span>
         <span class="c1">#Get the mean and standard deviation of the batch, update running average</span>
-        <span class="n">mean</span> <span class="o">=</span> <span class="n">xb</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">var</span> <span class="o">=</span> <span class="n">xb</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">xb</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">var</span> <span class="o">=</span> <span class="n">xb</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mom</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">means</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mom</span><span class="p">)</span> <span class="o">*</span> <span class="n">mean</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mom</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">vars</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mom</span><span class="p">)</span> <span class="o">*</span> <span class="n">var</span>
         <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">var</span>
 
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xb</span><span class="p">):</span> 
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">learner</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">training</span><span class="p">:</span>
+            <span class="n">normed</span> <span class="o">=</span> <span class="p">(</span><span class="n">xb</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vars</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">normed</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplier</span><span class="o">.</span><span class="n">d</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">adder</span><span class="o">.</span><span class="n">d</span>
         <span class="n">mean</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">after_stats</span> <span class="o">=</span> <span class="p">(</span><span class="n">xb</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">var</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">after_scaling</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">after_stats</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiplier</span><span class="o">.</span><span class="n">d</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">adder</span><span class="o">.</span><span class="n">d</span>
@@ -196,8 +238,8 @@ good
     <span class="k">def</span> <span class="nf">bwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">inp</span><span class="p">):</span>
         <span class="n">bs</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">multiplier</span><span class="o">.</span><span class="n">update</span><span class="p">((</span><span class="n">out</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">after_stats</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">adder</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">keepdim</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">multiplier</span><span class="o">.</span><span class="n">update</span><span class="p">((</span><span class="n">out</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">after_stats</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adder</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 
         <span class="n">var_factor</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vars</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span><span class="o">.</span><span class="n">sqrt</span><span class="p">()</span>
         <span class="n">mean_factor</span> <span class="o">=</span> <span class="n">inp</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">means</span>
@@ -209,15 +251,21 @@ good
 
         <span class="n">inp</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">delta_norm</span> <span class="o">*</span> <span class="n">var_factor</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">delta_mean</span> <span class="o">/</span> <span class="n">bs</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">delta_var</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">bs</span> <span class="o">*</span> <span class="n">mean_factor</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;Batchnorm&#39;</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Batchnorm(</span><span class="si">{self.nf}</span><span class="s1">)&#39;</span>
 </pre></div>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -227,7 +275,7 @@ good
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_conv_model" class="doc_header"><code>get_conv_model</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/batchnorm_06.py#L109" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_conv_model</code>()</p>
+<h4 id="get_conv_model" class="doc_header"><code>get_conv_model</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/batchnorm_06.py#L112" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_conv_model</code>()</p>
 </blockquote>
 <p>Returns a sequential convolutional model</p>
 
@@ -239,6 +287,10 @@ good
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -248,7 +300,7 @@ good
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_conv_learner" class="doc_header"><code>get_conv_learner</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/batchnorm_06.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_conv_learner</code>()</p>
+<h4 id="get_conv_learner" class="doc_header"><code>get_conv_learner</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/batchnorm_06.py#L121" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_conv_learner</code>()</p>
 </blockquote>
 <p>Returns a conv learner object</p>
 
@@ -260,6 +312,10 @@ good
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -269,7 +325,7 @@ good
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_conv_runner" class="doc_header"><code>get_conv_runner</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/batchnorm_06.py#L126" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_conv_runner</code>(<strong><code>callbacks</code></strong>)</p>
+<h4 id="get_conv_runner" class="doc_header"><code>get_conv_runner</code><a href="https://github.com/BradleyBrown19/ModernArchitecturesFromScratch/tree/master/ModernArchitecturesFromScratch/batchnorm_06.py#L129" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_conv_runner</code>(<strong><code>callbacks</code></strong>)</p>
 </blockquote>
 <p>Returns a convolutionary model runner, ready to be fitted with given <code>callbacks</code></p>
 
@@ -281,12 +337,16 @@ good
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="n">get_conv_runner</span><span class="p">([</span><span class="n">ProgressCallback</span><span class="p">(),</span> <span class="n">CheckGrad</span><span class="p">()])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span> <span class="o">=</span> <span class="n">get_conv_learner</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -294,6 +354,70 @@ good
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">learner</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Data: 
+ Databunch(
+Train: &lt;ModernArchitecturesFromScratch.model_training_03.DataLoader object at 0x137a4ceb8&gt;, 
+Valid&lt;ModernArchitecturesFromScratch.model_training_03.DataLoader object at 0x137a65fd0&gt;
+) 
+ Model: 
+ (Layer1): Reshape(1, 28, 28)
+(Layer2): Conv(1, 8, ks = 3, stride = 2)
+(Layer3): Batchnorm(8)
+(Layer4): Flatten()
+(Layer5): Linear(1352, 10)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="n">get_conv_runner</span><span class="p">([</span><span class="n">CheckGrad</span><span class="p">()])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -316,7 +440,7 @@ good
 <div class="output_text output_subarea output_execute_result">
 <pre>(Layer1): Reshape(1, 28, 28)
 (Layer2): Conv(1, 8, ks = 3, stride = 2)
-(Layer3): Batchnorm
+(Layer3): Batchnorm(8)
 (Layer4): Flatten()
 (Layer5): Linear(1352, 10)</pre>
 </div>
@@ -327,6 +451,8 @@ good
 </div>
 
 </div>
+    {% endraw %}
+
 </div>
  
 
