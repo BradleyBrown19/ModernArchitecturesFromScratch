@@ -2,7 +2,7 @@ topnav:
 - title: Topnav
   items:
     - title: GitHub
-      external_url: https://github.com/BradleyBrown19/ModernArchitecuturesFromScratch
+      external_url: https://github.com/BradleyBrown19/ModernArchitecturesFromScratch
 
 #Topnav dropdowns
 topnav_dropdowns:

@@ -1,10 +1,10 @@
 SRC = $(wildcard ./*.ipynb)
 
-all: ModernArchitecuturesFromScratch docs
+all: ModernArchitecturesFromScratch docs
 
-ModernArchitecuturesFromScratch: $(SRC)
+ModernArchitecturesFromScratch: $(SRC)
 	nbdev_build_lib
-	touch ModernArchitecuturesFromScratch
+	touch ModernArchitecturesFromScratch
 
 docs_serve: docs
 	cd docs && bundle exec jekyll serve

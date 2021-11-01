@@ -1,7 +1,7 @@
-repository: BradleyBrown19/ModernArchitecuturesFromScratch
+repository: BradleyBrown19/ModernArchitecturesFromScratch
 output: web
-topnav_title: ModernArchitecuturesFromScratch
-site_title: ModernArchitecuturesFromScratch
+topnav_title: ModernArchitecturesFromScratch
+site_title: ModernArchitecturesFromScratch
 company_name: BradleyBrown
 description: Recreating notable modern deep learning architectures using only python and tensors. No Pytorch or Tensorflow.
 # Set to false to disable KaTeX math
